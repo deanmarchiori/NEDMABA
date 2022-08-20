@@ -1,0 +1,57 @@
+---
+title: "Untitled"
+author: "Dean Marchiori"
+date: "8/20/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(survival)
+library(survminer)
+library(SMPD4)
+library(dplyr)
+```
+
+```{r}
+nedmaba <- smpd4_phenotype |> 
+  select(id, survival_time, deceased, gender) |> 
+  mutate(deceased = as.numeric(deceased)) 
+```
+
+```{r}
+km1 <- survfit(Surv(survival_time, deceased) ~ 1, data = nedmaba)
+summary(km1, times= (0:13)*365, scale=365)
+ggsurvplot(km1,
+          conf.int = TRUE,
+          risk.table = TRUE, # Add risk table
+          risk.table.col = "strata", # Change risk table color by groups
+          linetype = "strata", # Change line type by groups
+          surv.median.line = "hv", # Specify median survival
+          ggtheme = theme_bw(), # Change ggplot2 theme
+          palette = c("#E7B800", "#2E9FDF"))
+```
+
+```{r}
+km2 <- survfit(Surv(survival_time, deceased) ~ gender, data = nedmaba)
+km2
+summary(km2, times= (0:13)*365, scale=365)
+
+ggsurvplot(km2,
+          pval = TRUE, conf.int = TRUE,
+          risk.table = TRUE, # Add risk table
+          risk.table.col = "strata", # Change risk table color by groups
+          linetype = "strata", # Change line type by groups
+          surv.median.line = "hv", # Specify median survival
+          ggtheme = theme_bw(), # Change ggplot2 theme
+          palette = c("#E7B800", "#2E9FDF"))
+
+survdiff(Surv(survival_time, deceased) ~ gender, data = nedmaba)
+
+fit <- coxph(Surv(survival_time, deceased) ~ gender, data = nedmaba)
+summary(fit)
+```
+
