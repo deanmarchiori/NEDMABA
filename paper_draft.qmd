@@ -1,0 +1,308 @@
+---
+title: "paper_draft"
+author: "DM"
+format: pdf
+editor: visual
+bibliography: refs.bib
+execute: 
+  echo: false 
+---
+
+
+## Title
+
+-   the name of the organism studied
+
+-   the particular aspect or system studied
+
+-   the variable(s) manipulated.
+
+## Abstract
+
+passive voice
+
+(typically 150-300 words)
+
+-   A brief introduction to the topic that you're investigating.
+
+-   Explanation of why the topic is important in your field/s.
+
+-   Statement about what the gap is in the research.
+
+-   Your research question/s / aim/s.
+
+-   An indication of your research methods and approach.
+
+-   Your key message.
+
+-   A summary of your key findings.
+
+-   An explanation of why your findings and key message contribute to the field/s
+
+## Introduction
+
+Neurodevelopment disorders are a diverse and heterogeneous group of conditions impacting the development of the nervous system, brain function, physical development, emotional development and learning ability. A recently identified condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) (MIM:[618622](https://omim.org/entry/618622)) has been described in children with biallelic loss-of-function variants in *SMPD4* [@magini2019loss].
+
+Sphingomyelinases such as *SMPD4* hydrolyze sphingomyelin into ceramide and phosphorylcholine. *SMPD4* specifically encodes one of 4 neutral sphinogmyelinases, nSMase3 (MIM: [610457](http://omim.org/entry/610457)).
+
+So far, only approximately 30 cases have been reported across over 12 families. Clinical phenotype data of these cases is largely heterogeneous with severe neurological complications and early demise a key feature. This makes the identification, diagnosis and ongoing management of cases a challenge for patients, their families and medical practitioners.
+
+@ravenscroft2021neurogenetic performed a study over 190 probands with a diagnosis of arthrogryposis multiplex congenita, distal arthrogryposis, fetal akinesia deformation sequence or multiple pterygium syndrome. This study identified a novel missense variation in SMPD4 which at the time of whole exome sequencing was not well described in the literature. The impacted family from Melbourne exhibited features involving arthrogryposis multiplex congenita, complex brain malformations, small for gestation age and hypoplasia of the corpus callosum. In two of the three related cases were additional features of microcephaly, congenital encephalopathy, cerebellar malformation and hypoplasia and hypomyelination.
+
+@monies2019lessons described two families with different homozygous truncating variants in SMPD4 as a syndrome of skeletal dysplasia with cerebella atrophy. The phenotypes described involved bilateral clenched hands, talipes, IUGR, partial absence of corpus callosum with family history of three neonatal deaths with similar features.
+
+A detailed study by @magini2019loss involved 12 unrelated familes with 32 individuals (21 with detailed clinical information). Hallmark presentations were of microcephaly, simplified gyration, hypomyelination, thin corpus callosum, mild cerebellar hypoplasia, brainstem hypoplasia, congenital arthrogryposis, diabetes mellitus, heart disease, severe encephalopathy and respiratory problems often leading to early demise. Despite this being the largest cohort studied, the clinical features and survival times among participants varied greatly. Three missense changes were noted in the study with affected children in these families often showing a milder presentation suggestive of possible residual function. In these cases individuals were able to develop independent motor skills, have mild intellectual disability and arthrogryposis without evidence of simplified gyral patterns on brain MRI. Other patients with truncating variants are shown to have more severe presentations, while a range of additional significant phenotypes were reported involving dysmorphic facial features, seizure, vocal cord paralysis and hearing impairment.
+
+A recent case study from China is described in @ji2022case involving a girl presenting in infancy with intrauterine growth restriction, microcephaly, postnatal developmental delay, arthrogryposis, hypertonicity, seizure, and hypomyelination on brain magnetic resonance imaging. @ji2022case argues the actual prevalence of this condition, based on the gene carrier rate is understated and may be attributable to typical symptoms of NEDMABA being non-specific, providing a diagnostic challenge in a clinical setting.
+
+A recent study by @bijarnia2022growth presents the case of a 22-month old girl presenting with the typical phenotype of neurodevelopmental delay, prenatal onset growth failure, arthrogryposis, microcephaly and brain anomalies including severe hypomyelination, simplified gyral pattern and hypoplasia of corpus callosum and brainstem. Notably, there is also additional non-typical clinical findings of nystagmus and visual impairment secondary to macular dystrophy and retinal pigment epithelial stippling at posterior pole.
+
+@ji2022case reports parallels with two cases showing the same homozygous null variant. The individual reported in @monies2019lessons presented with distinct symptoms of brain atrophy and skeletal dysplasia whereas the case in @magini2019loss with the same variant exhibited more typical clinical features.
+
+Further work to collate and analyse the current body of research is challenging. While @magini2019loss cataloged a detailed clinical phenotype data set as a supplimentary to their study, these data are not suitable for statisical analysis. Many of the clinical features are represented as free text descriptions and a variety of non-standard terminology is applied between cases, making machine interpretation of the data difficult. Other studies [@ji2022case; @bijarnia2022growth] present only written case reports with some tabulated summaries. While larger studies [@ravenscroft2021neurogenetic; @monies2019lessons] offer data genotype analysis, there is less detail included on the clinical phenotype of indivuduals in the cohort.
+
+Given the severe nature of this condition, often leading to early demise, a gap exists in understanding the expected survival time for individuals with bi-allelic null-variants in SMPD4. While a connection has been highlighted between some missense variants and a milder presentation with longer survival, this hypothesis has not been analysed further. Furthermore, the associations between diverse features of NEDMADA have not been analysed in detail, in-part due to the sparse and inconsistent collection of clinical and case report data for this new condition.
+
+An open research question exists around the clinical pathway and survival time of children exhibiting bi-allelic loss-of-function variants in SMPD4. With current research highlighting a diverse and heterogeneous phenotype, the relationship and correlations between these diverse features is not well understood.
+
+This research has three key aims. First, to collate and transform the variety of early case reports and studies on clinical phenotype data for this novel variant into an analysis-ready *tidy* dataset [@JSSv059i10]. Secondly, to statistically quantify the expected survival time of children with NEDMABA based on the current case reports. Finally, detailed analysis will be conducted to further understand the associations between both patients and their clinical features.
+
+While current research in this area has highlighted a diverse range of presentations, this will be the first in-depth analysis of early studies of this novel variant, which aims to produce statistical findings to better describe and understand this condition. This research is significant as it will assist clinicians understand the typical and non-typical presentations of this challenging new condition. In addition, genetic counselling of families with affected children will benefit from enhanced analysis on outcomes of existing reported cases.
+
+## Methods
+
+### SMPD4 Data Package  
+
+The data contained in @magini2019loss "Summary of SMPD4-Related Clinical Phenotype" is an excel spreadsheet tabulating each of the 21 individuals from the study
+with clinical details recorded. The file has 21 columns (one for each individual), and 64 rows (one for each phenotype or clinical remark).  
+
+The data were read into R [@rbase] without any changes, so as to preserve the reproducibility of the data transformation steps. 
+
+The data were transposed to ensure it could be presented as *tidy* formatted data [@JSSv059i10]. This requires:  
+
+1. Each variable (clinical phenotype) forms a column.
+2. Each observation (individual) forms a row.
+3. Each type of observational unit forms a table  (every cell has just one item)  
+
+In many cases, key clinical information was entered as free-text descriptions, which rendered any attempt of meaningful analysis impractical (@tbl-nontidy). In these cases, the text was tokenised by separating the list of clinical observations at each comma and forming a binary indicator column noting its presence '1' or absence '0' (@tbl-tidy).  
+
+
+|         | Family 1- Individual 1 | Family 1- Individual 4 |
+|---------| -----------------------|------------------------|  
+Facial dysmorphisms | short palpebral fissures, large ears, simple helices, smooth philtrum, thin lips, bilateral simian creases | short palpebral fissures, receding forehead, thin upper lip | 
+
+: Example of non-tidy free-text descriptions of features {#tbl-nontidy}
+
+
+| id          | short palpebral fissures | large ears |simple helices | receding forehead | ... | 
+| ------------|------|------|------|------|-----|
+| Family 1- Individual 1  | 1 |  1 | 0 | ... |
+| Family 1- Individual 4  | 1 | 0 | 0 | 1 | ... |    
+
+: Example of tidy formatted data where individuals are transposed into rows and text into binary indicators {#tbl-tidy}
+
+In the case where two variables were formed from phenotypes that are considered to be synonymous, these
+were merged into one indicator column to prevent duplication e.g. {bilateral_cleft_lips, bilateral_cleft_lip, cleft_lip_b_l}.  
+
+Some data type conversion and categorical level standardisation was performed to ensure the data were in consistent and appropriate data types. For example, 'Gender' was not consistently coded, and 'Birth Weight' was encoded as a text string rather than a more useful numeric format. (@tbl-data-types).
+
+
+| Gender | Birth Weight |
+|--------|--------------|
+| male   | 2175 grams (- 2.5 SD) |
+| female | 2045 g (-3 SD) |
+| Female | 2300 gram (-2 SD) |
+| Female fetus | n.a. |
+
+: Example of inconsistent coding or sub-optimal data types {#tbl-data-types}
+
+The final dataset consisted of 21 observations (one per individual) and 152 variables (one per clinical feature). 
+
+This format was preserved and other case studies identified in the literature [@ravenscroft2021neurogenetic; @monies2019lessons;
+@bijarnia2022growth; @ji2022case] were manually entered to conform to this template to allow the data to be combined for further
+analysis.   
+
+These data sets were packaged into an R Package called SMPD4 [@smpd4-data] in order to allow for reproducibility and sharing. This can 
+be downloaded and installed from github at [https://github.com/deanmarchiori/SMPD4](https://github.com/deanmarchiori/SMPD4).  
+
+
+### Multiple Correspondence Analysis  
+
+
+### Cluster Analysis  
+
+
+### Survival Analysis  
+
+
+
+
+
+
+
+
+
+
+
+-  Explain why each procedure was done
+
+-   Experimental procedures and results are narrated in the past tense
+
+-   Mathematical equations and statistical tests are considered mathematical methods and should be described in this section along with the actual experimental work.
+
+
+
+## Results
+
+The function of this section is to summarize general trends in the data without comment, bias, or interpretation. The results of statistical tests applied to your data are reported in this section although conclusions about your original hypotheses are saved for the Discussion section.
+
+## Discussion
+
+-   the relationship between the results and the original hypothesis, i.e., whether they support the hypothesis, or cause it to be rejected or modified
+
+-   an integration of your results with those of previous studies in order to arrive at explanations for the observed phenomena
+
+-   possible explanations for unexpected results and observations, phrased as hypotheses that can be tested by realistic experimental procedures, which you should describe
+
+-   End the Discussion with a summary of the principal points you want the reader to remember
+
+@bijarnia2022growth
+
+## References
+
+```{r eval = FALSE}
+source('_targets_packages.R')
+library(targets)
+library(knitr)
+
+```
+
+```{r fig.height=8, fig.width=8, eval=FALSE}
+tar_load(subjects)
+tar_load(cluster_data)
+tar_load(clusters)
+tar_load(cluster_assign)
+
+cm <- as.matrix(cluster_data)
+# Check the most similar
+subjects[which(cm == min(cm[cm != min(cm)]), arr.ind = TRUE)[1, ], ]
+
+# Check the most dissimilar
+subjects[which(cm == max(cm[cm != max(cm)]), arr.ind = TRUE)[1, ], ]
+
+summary(clusters)
+plot(clusters)
+rect.hclust(clusters, k=4, border="red")
+
+tar_load(pca_data)
+
+pca_data |> 
+  bind_cols(cluster = cluster_assign) |> 
+  pivot_longer(cols = -c(cluster), names_to = 'a', values_to = 'v') |> 
+  group_by(cluster, a) |> 
+  summarise(n = sum(v)) |>  
+  arrange(n) |> 
+  ggplot(aes(n, a)) +
+  geom_col() +
+  facet_wrap(~cluster, scales = "free_x")
+
+tibble(n = 1:nrow(subjects), id = subjects$id, cluster  = cluster_assign) |> kable()
+
+tibble(n = 1:nrow(subjects), 
+       d = subjects$id, 
+       dec = subjects$deceased,
+       st = subjects$survival_time, 
+       cluster  = cluster_assign) |> 
+  group_by(cluster) |> 
+  summarise(ast = mean(st),
+            mst = max(st),
+            minst = min(st),
+            n = n(),
+            sd = sum(dec))
+
+```
+
+```{r fig.height=8, fig.width=8, eval=FALSE}
+tar_load(survival_data)
+tar_load(kapm)
+tar_load(cox_ph)
+kapm <- survfit(Surv(survival_time, deceased) ~ cluster, data = survival_data)
+summary(kapm, times= (0:60)*30, scale=30)
+x <- survminer::surv_summary(kapm, data = survival_data)
+plot(kapm)
+survminer::ggsurvplot_df(x,
+                              conf.int = TRUE,
+          risk.table = TRUE, # Add risk table
+          risk.table.col = "strata", # Change risk table color by groups
+          linetype = "strata", # Change line type by groups
+          surv.median.line = "hv", # Specify median survival
+          ggtheme = theme_bw())
+
+survival::survdiff(Surv(survival_time, deceased) ~ cluster, data = survival_data)
+coxph(Surv(survival_time, deceased) ~ cluster, data = survival_data)
+summary(cox_ph)
+
+```
+
+```{r eval=FALSE}
+library(FactoMineR)
+library(factoextra)
+
+plot.MCA(mca,invisible=c("quali.sup","quanti.sup"),cex=0.7,  autoLab = 'yes', select  = "contrib 5", selectMod = "cos2 5") +
+  theme(panel.grid.major = element_blank(),
+        plot.title=element_text(size=14, color="blue"),
+        axis.title = element_text(size=12, color="red"))
+
+
+plotellipses(res.mca,keepvar=1:20)
+
+# eigenvalues
+fviz_screeplot(res.mca, addlabels = TRUE, ylim = c(0, 45))
+
+# biplot 
+fviz_mca_biplot(res.mca, 
+                repel = TRUE, # Avoid text overlapping (slow if many point)
+                ggtheme = theme_minimal())
+
+# variable plots
+
+
+fviz_mca_var(res.mca, choice = "var",repel = T,
+             ggtheme = theme_minimal())
+
+fviz_mca_var(res.mca, choice = "var.cat", repel = T,
+             ggtheme = theme_minimal())
+
+
+### quality 
+fviz_mca_var(res.mca, col.var = "cos2",
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"), 
+             repel = TRUE, # Avoid text overlapping
+             ggtheme = theme_minimal())
+
+fviz_mca_var(res.mca, alpha.var="cos2",
+             repel = TRUE,
+             ggtheme = theme_minimal())
+
+fviz_cos2(res.mca, choice = "var", axes = 1:2)
+
+
+# indiv
+fviz_mca_ind(res.mca, 
+             label = "none", # hide individual labels
+             habillage = "deceased", # color by groups 
+             palette = c("#00AFBB", "#E7B800"),
+             addEllipses = TRUE, ellipse.type = "confidence",
+             ggtheme = theme_minimal()) 
+
+fviz_mca_ind(res.mca, col.ind = "cos2", 
+             gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+             repel = TRUE, # Avoid text overlapping (slow if many points)
+             ggtheme = theme_minimal())
+
+
+res.desc <- dimdesc(res.mca, axes = c(1, 2))
+
+res.desc[[2]]
+
+```
