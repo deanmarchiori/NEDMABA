@@ -1,11 +1,18 @@
-prep_cluster_data <-  function(data,
-                               keep_cols) {
-  clust <- data |>
-    dplyr::select(all_of(keep_cols))  |> 
-    select_if(function(x) (length(unique(x)) == 2 & min(table(x))>1)) |> 
-    dplyr::mutate(across(everything(), as.factor)) 
+prep_cluster_data <- function(data, cols){
   
-  rownames(clust) <- data$id
+  vars <- data$var$coord |> 
+    as_tibble(rownames = 'var') |> 
+    filter(str_detect(var, "_1")) |> 
+    janitor::clean_names() |> 
+    select(var, all_of(cols)) |> 
+    as.data.frame()
   
-  return(clust)
-  }
+  rownames(vars) <- vars$var
+  
+  clust_dat <- vars[, -1]
+  
+  return(clust_dat)
+  
+}
+
+

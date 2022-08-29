@@ -1,29 +1,33 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|79c9f87bfee3741b|||||||||||||||
-cluster_assign|stem|e05d63b0e1ef05cb|d8528a146aa27138|cefd3f4b0559c2a9|1997281000||t19230.2795811442s|155dcb23a3dc3cf4|236|rds|local|vector|||0.001||
-cluster_data|stem|60b65bcf033ff071|e4e1bc26d8323a12|14c2288e1fc73988|-610343225||t19230.2782264862s|c595472cc647335d|1460|rds|local|vector|||0.188|Setting row names on a tibble is deprecated.|
-clusters|stem|81c7e8f320b220d1|9c36845a0ad6df4b|aa0623d2b413f65c|1240830349||t19230.2789073097s|8917fed2537c845f|682|rds|local|vector|||0.002||
+.Random.seed|object|79b4567b1f41a39b|||||||||||||||
+cluster_assign|stem|8ffa90ffdb09240d|d8528a146aa27138|bd4be89c7c6dc9bf|1997281000||t19232.4142747313s|155dcb23a3dc3cf4|236|rds|local|vector|||0.001||
+cluster_assignments|stem|e3785f9b5a9dcdf1|21cf341414267455|4b3957bff13d4cf1|-1377731317||t19233.2053878299s|80d8a0d48d45f5aa|172|rds|local|vector|||0.001||
+cluster_data|stem|5307552cc7ff30b2|397db77200c6699c|3ef49f30ca9f7732|-610343225||t19233.2053863484s|437e9be6fd206218|1747|rds|local|vector|||0.047||
+cluster_select|stem|10d771da6e0dcdd5|334febf2954de830|4ed59f9985f60437|1132699111||t19233.2053875984s|e341fc86d305c374|2531|rds|local|vector|||0.098||
+clustering|stem|039da1ccc5812a8f|eb78d17c1fff8d2b|038c80e079533122|2138518292||t19233.2053877373s|c8f74ec2025fc7c5|11477|rds|local|vector|||0.002||
+clusters|stem|223caef34796372d|9c36845a0ad6df4b|b70ecdedd9a718cb|1240830349||t19232.4142746387s|c91a6b892b3e25c8|681|rds|local|vector|||0.004||
 cor_plot|stem|bd4ea28d61ff5bf3|ddedcbfa977eb04d|d79e0285d152fee7|-715809824||t19227.1646388231s|c0dcd4d49bcd05d5|8687|rds|local|vector|||0.084||
 correlations|stem|ca1239720b175c8f|cb2f9e43aee71830|a0ebaf76bcf0bd99|-866504152||t19229.0376096908s||4720|rds|local|vector|||0.006||x must be numeric
 corrplot|function|a7aba26347b82804|||||||||||||||
-cox_ph|stem|6360d738751d6e27|f0f5aa497891d24b|cfa3451cd008139e|-1670480737||t19230.4320413752s|efd516c68024e018|1736|rds|local|vector|||0.02||
-kapm|stem|895bf45f829ef193|08ecbad02aab4133|03b89bc9a84d56f1|-1829117226||t19230.4320415141s|d6fe477b048a1336|1197|rds|local|vector|||0.004||
-kapm_baseline|stem|54ae319b288b29e6|855212d5a7e0d279|7ed3dcf720a40643|1127922315||t19230.4320416067s|92ce8485ff7a0e53|1183|rds|local|vector|||0.002||
+cox_ph|stem|340967503fc4f0a5|31be075064fe5699|1ac1af0142d18643|-1670480737||t19233.1883211431s|b75bfb7737803e53|2437|rds|local|vector|||0.015|Loglik converged before variable  4  coefficient may be infinite.|
+kapm|stem|11cae55f6cced3ba|42c622269449ad9a|5c54f4bf7ee45d02|-1829117226||t19233.188321282s|a0f06ba485bff0e4|1090|rds|local|vector|||0.004||
+kapm_baseline|stem|12f87d3cda04312e|855212d5a7e0d279|12f57982ef43051e|1127922315||t19233.1883213746s|92ce8485ff7a0e53|1183|rds|local|vector|||0.001||
 loadings|stem|cc49ee14e327c4d0|df83ced0d47a8978|7f82db5678bee21d|1092843558||t19229.0376102927s|ce517f10517ef99b|67509|rds|local|vector|||0.012||
-mca|stem|046dd9c254acca3a|101a6b0cce280178|1a87dcc139ed251a|1336427768||t19230.2748649909s|04408a7d3cadf7c1|26665|rds|local|vector|||0.031||
-mca_data|stem|e61f645c27bc12e2|92afbccc15459398|85db8927a033a5c4|492406433||t19230.274864528s|1cca554f0e92ae2a|1329|rds|local|vector|||0.175||
+logrank|stem|8e366ed907248f27|aef4c9edc626f250|7cc3f5452b143840|571043329||t19233.1883215135s|b1b5493d247e5e22|829|rds|local|vector|||0.005||
+mca|stem|28f06a59b50b2d98|101a6b0cce280178|97e95c403f7ce51d|1336427768||t19232.4142744998s|04408a7d3cadf7c1|26665|rds|local|vector|||0.053||
+mca_data|stem|d57165093121414c|92afbccc15459398|cacfec699da80ff1|492406433||t19232.4142726479s|b433b64297ce9973|1330|rds|local|vector|||0.101||
 pca|stem|8fcb1471f460480f|c1b8aaf269cba2aa|2f608fa423ca8121|-1512544482||t19229.0376098297s|c11d9ec29839218e|16125|rds|local|vector|||0.006||
 pca_data|stem|8792dd5d80715fb6|b2f0deaa46fc0afa|a498de070854cf1a|-1002720476||t19230.1306917904s||1293|rds|local|vector|||0.002||unused argument keep_freq  1
 plot_pca_loadings|function|3159f9c6048c36b6|||||||||||||||
 plot_pca_scores|function|d9fb79e7e4a64951|||||||||||||||
-prep_cluster_data|function|f0ef9471e6b91541|||||||||||||||
+prep_cluster_data|function|aeb5935ebf52007c|||||||||||||||
 prep_for_pca|function|0fb559e70289bad5|||||||||||||||
 prep_mca_data|function|0ff57b3906002242|||||||||||||||
 prep_pca_data|function|9c472ecdb504dc72|||||||||||||||
-prep_subjects_data|function|c37653fc9b1a1f1e|||||||||||||||
-prep_survival_data|function|4cbbad372c282215|||||||||||||||
-report|stem|f40e1c674d845fbc|336ff2e0444a3b68|d84d7cdd1c3c4b08|-237041703|paper_draft.pdf*paper_draft.qmd|t19230.4320395233s|32d6c9e6713693f3|24159|file|local|vector|||11.677|replacing previous import lifecyclelast_warnings by rlanglast_warnings when loading hms|
+prep_subjects_data|function|fb7f7bc030b20650|||||||||||||||
+prep_survival_data|function|42b110e0451e560c|||||||||||||||
+report|stem|793d5e19fd29c9c4|7aa23ff7d183afea|4f619304611c0fbe|-237041703|paper_draft.pdf*paper_draft.qmd|t19233.205578756s|0a832a373c96a8b2|164591|file|local|vector|||16.507||
 scores|stem|1eb5f10d878d36b5|0ff42bc600bd14e3|eea3e1179d540b95|-1359168496||t19229.0376108019s|495ab130fc480d5d|74248|rds|local|vector|||0.008||
-subjects|stem|31c6d823c6562c64|43dc38c6e809ff46|f5ec253df19f58df|-2122414142||t19231.0196432747s|e3d695a52a0f8ed5|6767|rds|local|vector|||2.153|replacing previous import lifecyclelast_warnings by rlanglast_warnings when loading hms|
-subjects_clustered|stem|dcf131c2cf3102d2|e2665bda62ed11f9|bd745b5446e3e5de|223354846||t19230.2809855295s|265a3534cea34551|6938|rds|local|vector|||0.001||
-survival_data|stem|860c35e4dd70b5a1|3a37e07e16822c17|1b27c020629d8e38|1276018735||t19230.4239518207s|85d1e02283cfd189|523|rds|local|vector|||0.032||
+subjects|stem|c00bf46c570745dd|43dc38c6e809ff46|bfdcf24184b9d027|-2122414142||t19233.2053852836s|af889345790a5cf7|6276|rds|local|vector|||1.878||
+subjects_clustered|stem|0284c970b3d5a00a|e2665bda62ed11f9|d90e5d332ada7b28|223354846||t19232.4142748702s|bc5c1d3c48e2dce4|6446|rds|local|vector|||0.001||
+survival_data|stem|b0567ff192572d87|05976a3ef4bed5ad|a127edab39472e41|1276018735||t19233.1883208653s|e39b36b147b4228c|794|rds|local|vector|||0.049||
