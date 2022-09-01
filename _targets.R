@@ -13,11 +13,14 @@ tar_source()
 
 # Pipelinme
 list(
-  tar_target(subjects, prep_subjects_data(), cue = tar_cue(mode = "always")),
+  tar_target(subjects, prep_subjects_data()),
   
   # MCA
-  tar_target(mca_data, prep_mca_data(data = subjects, 
+  tar_target(mca_data_prelim, prep_mca_data(data = subjects, 
                                     keep_cols = c(21:53, 57:60, 73, 77, 80, 86:152))),
+  tar_target(mca_prelim,  MCA(mca_data_prelim, graph = FALSE)),
+  tar_target(mca_data, prep_mca_data(data = slice(subjects, -c(17, 18)), 
+                                     keep_cols = c(21:53, 57:60, 73, 77, 80, 86:152))),
   tar_target(mca,  MCA(mca_data, graph = FALSE)),
   
   ## cluster analysis 
@@ -25,9 +28,9 @@ list(
   tar_target(cluster_select, clValid(cluster_data,
                                      nClust = 2:10, 
                                      clMethods = "hierarchical", 
-                                     validation = "stability")),
+                                     validation = "internal")),
   tar_target(clustering, agnes(cluster_data)),
-  tar_target(cluster_assignments, factor(cutree(clustering, 9))),
+  tar_target(cluster_assignments, factor(cutree(clustering, 6))),
   
   ## Survival Analysis
   tar_target(survival_data, prep_survival_data(data = subjects,
