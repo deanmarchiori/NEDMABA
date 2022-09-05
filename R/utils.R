@@ -17,8 +17,7 @@ scale_y_reordered <- function(..., sep = "___") {
 
 make_data_dictionary <- function(data){
   dd <- data.frame(variable = names(data), 
-                   type = unlist(lapply(data, class), use.names = FALSE), 
-                   description = ".")
+                   type = unlist(lapply(data, class), use.names = FALSE))
   gt::gt(dd) 
 }
 
