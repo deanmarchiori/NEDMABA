@@ -3,7 +3,9 @@ library(tarchetypes)
 
 # Set target options
 tar_option_set(
-  packages = c("SMPD4", 'clValid', 'tidyverse', 'ggrepel', 'corrplot', 'cluster', 'survival', 'survminer', 'quarto', 'knitr', 'FactoMineR', 'factoextra'), 
+  packages = c("SMPD4", 'clValid', 'tidyverse', 'ggrepel', 
+               'cluster', 'survival', 'survminer', 'quarto',
+               'knitr', 'FactoMineR', 'factoextra', 'gt', 'withr'), 
   format = "rds" 
 )
 
@@ -24,13 +26,14 @@ list(
   tar_target(mca,  MCA(mca_data, graph = FALSE)),
   
   ## cluster analysis 
-  tar_target(cluster_data, prep_cluster_data(mca, cols = c('dim_1', 'dim_2'))),
+  tar_target(cluster_data, prep_cluster_data(mca, cols = c('dim_1', 'dim_2', 'dim_3', 'dim_4'))),
   tar_target(cluster_select, clValid(cluster_data,
-                                     nClust = 2:10, 
-                                     clMethods = "hierarchical", 
-                                     validation = "internal")),
-  tar_target(clustering, agnes(cluster_data)),
-  tar_target(cluster_assignments, factor(cutree(clustering, 6))),
+                                     nClust = 2:5, 
+                                     clMethods = c("agnes", "kmeans", "som"), 
+                                     method = "average", 
+                                     validation = "stability")),
+  tar_target(clustering, withr::with_seed(seed = 1234, kmeans(cluster_data, centers = 5, nstart = 10))),
+  tar_target(cluster_assignments, clustering$cluster),
   
   ## Survival Analysis
   tar_target(survival_data, prep_survival_data(data = subjects,
@@ -41,7 +44,8 @@ list(
   tar_target(cox_ph, coxph(Surv(survival_time, deceased) ~ variant, data = survival_data)),
 
   # Render Report
-  tar_quarto(report, path = "paper_draft.qmd")
+  tar_quarto(report, path = "paper.qmd")
 )
+
 
 

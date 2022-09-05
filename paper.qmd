@@ -1,7 +1,8 @@
 ---
-title: "paper_draft"
-author: "DM"
+title: "Statistical Analysis of Clinical Phenotype and Patient Survival in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies"
+author: "Dean Marchiori"
 format: pdf
+abstract: "A recently described, rare genetic condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) has been identified in children with bi-allelic loss-of-function variants in *SMPD4*. The progression of this condition is not well understood with the limited case reports described so far exhibiting a severe and diverse clinical phenotype. A gap exists in the understanding the associations of the heterogenous features present in the clinical phenotype and the expected survival probabilities of affected individuals, driven in part to the paucity of analysis-ready data. This research aims to collate and standardise available case reports to analyse and identify meaningful clusters in the clinical phenotype, and to quantify the survival probability for children with NEDMABA. To overcome the challenge of sparse, multidimensional data on very few subjects, we employ Multiple Correspondence Analysis as a dimension reduction technique, which is then subject to heirarchical clustering and interpretation. To quantify more accurate survival probabilities, Kaplan-Meier estimation is formulated to account for censoring in the data. The analysis identified the classic phenotype for this condition, as well as two other distinct feature clusters. The first relates to findings of vocal cord paralysis and swallowing dysfunction, the other relates to more complex brain anomalies. Furthermore, the survival probability for those affected was found to decline sharply in early infancy, but exhibited a wide range of outcomes provisionally associated with variant type. However, interpretation of these results are guarded based on very low sample sizes. Ultra rare conditions present a challenge for clinicians and families, with often limited information and diverse possible outcomes. Despite challenges with sparse and inconsistent data, this analysis helps describe associations and trajectories of indivudals with this condition and can provide clinicians and genetic counsellors with better information to aide in decision making and support for families."
 editor: visual
 bibliography: refs.bib
 execute: 
@@ -9,16 +10,9 @@ execute:
 ---
 
 ```{r echo=FALSE, message=FALSE}
-source('_targets_packages.R')
 library(targets)
-library(knitr)
-library(FactoMineR)
-library(factoextra)
-library(survival)
-library(clValid)
-
-source('R/utils.R')
-
+source(here::here('_targets_packages.R'))
+source(here::here('R', 'utils.R'))
 theme_set(theme_bw())
 ```
 
@@ -27,84 +21,35 @@ theme_set(theme_bw())
 # Better tables with gtsummary
 ```
 
-## Title
+# Introduction
 
-Statistical Clinical Phenotype and Patient Survival Analysis in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA)
+Neurodevelopment disorders are a diverse and heterogeneous group of conditions impacting the development of the nervous system, brain function, physical development, emotional development and learning ability. A recently identified condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) (MIM:[618622](https://omim.org/entry/618622)) has been described in children with bi-allelic loss-of-function variants in *SMPD4* [@magini2019loss]. Sphingomyelinases such as *SMPD4* play an important celluar role by hydrolyzing sphingomyelin into ceramide and phosphorylcholine. *SMPD4* specifically encodes one of 4 neutral sphinogmyelinases, nSMase3 (MIM: [610457](http://omim.org/entry/610457)). So far, less than 50 cases of this rare disorder have been reported in the literature. Clinical phenotype data of these cases is largely heterogeneous with severe neurological complications and early demise a key feature. This makes the identification, diagnosis and ongoing management of cases a challenge for patients, their families and medical practitioners.
 
-## Abstract
+@ravenscroft2021neurogenetic performed a study over 190 probands and identified a novel missense variation in SMPD4 which at the time of whole exome sequencing was not well described in the literature. The impacted family from Melbourne exhibited features involving arthrogryposis multiplex congenita, complex brain malformations, small for gestation age and hypoplasia of the corpus callosum. In two of the three related cases were additional features of microcephaly, congenital encephalopathy, cerebellar malformation and hypoplasia and hypomyelination.
 
-A recently described, rare genetic condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) has been identified in children with in children with bi-allelic loss-of-function variants in *SMPD4*. 
+A detailed study by @magini2019loss involved 12 unrelated familes with 32 individuals (21 with detailed clinical information). Presentations were of microcephaly, simplified gyration, hypomyelination, thin corpus callosum, mild cerebellar hypoplasia, brainstem hypoplasia, congenital arthrogryposis, diabetes mellitus, heart disease, severe encephalopathy and respiratory problems often leading to early demise. Despite this being the largest cohort studied, the clinical features and survival times among participants varied greatly. Three missense changes were noted in the study with affected children in these families often showing a milder presentation suggestive of possible residual function. In these cases individuals were able to develop independent motor skills, have mild intellectual disability and arthrogryposis without evidence of simplified gyral patterns on brain MRI. Other patients with truncating variants are shown to have more severe presentations, while a range of additional significant clinical features were reported involving dysmorphic facial features, seizure, vocal cord paralysis and hearing impairment.
 
-Few case reports have been described to date, with a diverse and severe clinical phenotype in most reported cases, the progression of this condition is not well understood. 
-
-A gap exists in the understanding the associations of the heterogenous features present in the clinical phenotype and the expected survival probabilities of indivudals with this condition. This is driven in part to the paucity of analysis-ready data on subjects. 
-
-This research aims to collate and standardise available case reports, to analyse and identify
-meaningful clusters in the clinical phenotype and the quantify the survival probability
-function for children with NEDMABA.
-
-To overcome the challenge of sparse, multidimensional data on very few subjects, we 
-employ Multiple Correspondece Analysis as a dimension reduction technique, which is 
-then subject to heirarchical clustering and interpretation. To quantify more accurate 
-survival probabilities, kaplan-meier estimation is formulated to account for censoring
-in the data. 
-
-Several distinct clusters of clinical features were discovered in the current case reports
-which can help explain the variation present in the clinical phenotype for children 
-with this condition. Furthermore, survival probability for those affected declines
-sharply in early infancy, but exhibits a wide range of outcomes provisionally 
-associated with variant type. 
-
-We are able to identify the classic phenotype for this condition, as well as two
-other auxillary feature clusters. The first relates findings of vocal cord paralysis and
-swallowing dysfunction, the other relates to more complex brain anomalies. In addition, 
-several outlying or non-typical features are able to be classified. Despite strong
-indications of differences in survival outcomes based on variant type, interpretation
-of these results are guarded based on very low sample sizes. 
-
-Ultra rare conditions are a challenge for clinicians and families, with often limited
-information on diverse outcomes. Despite challenges with sparse and inconsistent data, 
-analytical techniques to better describe associations and trajectories of indivudals
-with these conditions can provide clinicians and genetic counsellors with 
-enhanced information to aide in decision making and support for families. 
-
-
-## Introduction
-
-Neurodevelopment disorders are a diverse and heterogeneous group of conditions impacting the development of the nervous system, brain function, physical development, emotional development and learning ability. A recently identified condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) (MIM:[618622](https://omim.org/entry/618622)) has been described in children with bi-allelic loss-of-function variants in *SMPD4* [@magini2019loss]. Sphingomyelinases such as *SMPD4* play an important celluar role by hydrolyzing sphingomyelin into ceramide and phosphorylcholine. *SMPD4* specifically encodes one of 4 neutral sphinogmyelinases, nSMase3 (MIM: [610457](http://omim.org/entry/610457)).
-
-So far, only approximately 30 cases of this rare disorder have been reported across over 12 families. Clinical phenotype data of these cases is largely heterogeneous with severe neurological complications and early demise a key feature. This makes the identification, diagnosis and ongoing management of cases a challenge for patients, their families and medical practitioners.
-
-@ravenscroft2021neurogenetic performed a study over 190 probands with a diagnosis of arthrogryposis multiplex congenita, distal arthrogryposis, fetal akinesia deformation sequence or multiple pterygium syndrome. This study identified a novel missense variation in SMPD4 which at the time of whole exome sequencing was not well described in the literature. The impacted family from Melbourne exhibited features involving arthrogryposis multiplex congenita, complex brain malformations, small for gestation age and hypoplasia of the corpus callosum. In two of the three related cases were additional features of microcephaly, congenital encephalopathy, cerebellar malformation and hypoplasia and hypomyelination.
-
-@monies2019lessons described two families with different homozygous truncating variants in SMPD4 as a syndrome of skeletal dysplasia with cerebella atrophy. The phenotypes described involved bilateral clenched hands, talipes, IUGR, partial absence of corpus callosum with family history of three neonatal deaths with similar features.
-
-A detailed study by @magini2019loss involved 12 unrelated familes with 32 individuals (21 with detailed clinical information). Hallmark presentations were of microcephaly, simplified gyration, hypomyelination, thin corpus callosum, mild cerebellar hypoplasia, brainstem hypoplasia, congenital arthrogryposis, diabetes mellitus, heart disease, severe encephalopathy and respiratory problems often leading to early demise. Despite this being the largest cohort studied, the clinical features and survival times among participants varied greatly. Three missense changes were noted in the study with affected children in these families often showing a milder presentation suggestive of possible residual function. In these cases individuals were able to develop independent motor skills, have mild intellectual disability and arthrogryposis without evidence of simplified gyral patterns on brain MRI. Other patients with truncating variants are shown to have more severe presentations, while a range of additional significant clinical features were reported involving dysmorphic facial features, seizure, vocal cord paralysis and hearing impairment.
-
-A recent case study from China is described in @ji2022case involving a girl presenting in infancy with intrauterine growth restriction, microcephaly, postnatal developmental delay, arthrogryposis, hypertonicity, seizure, and hypomyelination on brain magnetic resonance imaging. @ji2022case argues the actual prevalence of this condition, based on the gene carrier rate is understated and may be attributable to typical symptoms of NEDMABA being non-specific, providing a diagnostic challenge in a clinical setting.
+A case study from China is described in @ji2022case involving a girl presenting in infancy with intrauterine growth restriction, microcephaly, postnatal developmental delay, arthrogryposis, hypertonicity, seizure, and hypomyelination on brain magnetic resonance imaging. The authors report parallels with two cases showing the same homozygous null variant. An individual reported in @monies2019lessons presented with distinct symptoms of brain atrophy and skeletal dysplasia whereas the case in @magini2019loss with the same variant exhibited more typical clinical features.
 
 A recent study by @bijarnia2022growth presents the case of a 22-month old girl presenting with the typical phenotype of neurodevelopmental delay, prenatal onset growth failure, arthrogryposis, microcephaly and brain anomalies including severe hypomyelination, simplified gyral pattern and hypoplasia of corpus callosum and brainstem. Notably, there is also additional non-typical clinical findings of nystagmus and visual impairment secondary to macular dystrophy and retinal pigment epithelial stippling at posterior pole.
 
-@ji2022case reports parallels with two cases showing the same homozygous null variant. An individual reported in @monies2019lessons presented with distinct symptoms of brain atrophy and skeletal dysplasia whereas the case in @magini2019loss with the same variant exhibited more typical clinical features.
-
 Further work to collate and analyse data relating to NEDMABA is challenging. While @magini2019loss cataloged a detailed clinical phenotype data set as a supplementary data set to their study, these data are not suitable for statistical analysis as presented. Many of the clinical features are represented as free text descriptions and a variety of non-standard terminologies are applied between cases, making machine interpretation of the data difficult. Other studies [@ji2022case; @bijarnia2022growth] present only written case reports with some tabulated summaries. While larger studies [@ravenscroft2021neurogenetic; @monies2019lessons] focus more on genetic data, with less detail included on the clinical presentation of individuals in the cohort.
 
-\
-To overcome these challenges, @JSSv059i10 proposes a data structure know as 'tidy' data which organises each observation in a row, with each feature as its own column and each value in just one cell. In this case detailed text-based data can be tranformed to high dimensional binary indicators of key clinical features. This structure is conducive to effective statistical analysis and integrates deliberately with the *tidyverse* [@tidyverse] collection of packages for data analysis in R [@rbase].
+To overcome these data challenges, @JSSv059i10 proposes a data structure know as 'tidy' data which organises each observation in a row, with each feature as its own column and each value in just one cell. In this case detailed text-based data can be tranformed to high dimensional binary indicators of key clinical features. This structure is conducive to effective statistical analysis and integrates deliberately with the *tidyverse* [@tidyverse] collection of packages for data analysis in R [@rbase].
 
 Further analysis to better describe rare genetic conditions was explored in @diaz2020phenotype in the context of large scale genotype-phenotype analysis. The authors argue patients with rare disorders (often in small samples) often present with varied symptoms that do not match exactly with the described phenotype. When considering this situation of low sample size data with many features, methods in the field of multivariate statistical analysis are commonly deployed. Here the aim is to find substructure in the data, or a simple representation of the multi-dimensional space. Methods, such as Multiple Correspondence Analysis [@le2010multiple] are appropriate for high dimensional data comprised of binary indicators. This technique is cited in many studies in the application of dimension reduction and clustering of comorbidities and phenotypes from disease [@han2018cluster; @costa2013use].
 
-When the focus is on survival or mortality, methods in statistical survival analysis are well suited and commonly used in the field of genomics [@chen2014survival]. These methods in particular provide a mechanism for dealing with right-censoring, a common feature of clinical studies where the clinical outcome of interest may not be known by the end of the study period. Within the context of examining a single condition, @Crowe810 investigated comorbidity phenotypes and mortality risk in ischaemic heart disease patients. Here latent class analysis was performed to identify a small number of clusters in the patients which could then be included in survival analysis techniques to better understand the substructre and outcome of patients of this condition.
+WIn terms of patient survival, methods in statistical survival analysis are well suited and commonly used in the field of genomics [@chen2014survival]. These methods in particular provide a mechanism for dealing with right-censoring, a common feature of clinical studies where the clinical outcome of interest may not be known by the end of the study period. Within the context of examining a single condition, @Crowe810 investigated comorbidity phenotypes and mortality risk in ischaemic heart disease patients. Here latent class analysis was performed to identify a small number of clusters in the patients which could then be included in survival analysis techniques to better understand the comparative outcomes of patients of this condition.
 
-An open research question exists around the clinical pathway and survival time of children exhibiting bi-allelic loss-of-function variants in SMPD4. With current research highlighting a diverse and heterogeneous phenotype, the relationship and correlations between these diverse features is not well understood. Furthermore, the survival time of affected children is not well understood despite early-demise featuring as a severe outcome. While a connection has been highlighted between some missense variants and a milder presentation with longer survival, this hypothesis has not been analysed further.
+An open research question exists around the clinical pathway and survival time of children exhibiting bi-allelic loss-of-function variants in SMPD4. With current research highlighting a diverse and heterogeneous phenotype, the relationship and correlations between these diverse features is not well understood. Furthermore, the survival time of affected children is not well understood despite early-demise featuring as a severe outcome. While a connection has been highlighted between some missense variants and a milder presentation with longer survival [@magini2019loss], this hypothesis has not been analysed further.
 
-This research has three key aims. First, to collate and transform the variety of early case reports and studies on clinical phenotype data for this novel variant into an analysis-ready *tidy* data set. Secondly, to conduct analysis on the associations between both patients and their clinical features. Finally, to statistically quantify the expected survival time of children with NEDMABA based on the current case reports.
+This research has three key aims. First, to collate and transform the variety of early case reports and studies on clinical phenotype data for this novel variant into an analysis-ready *tidy* data set. Secondly, to conduct analysis on the associations between commonly reported clinical features. Finally, to statistically quantify the expected survival time of children with NEDMABA based on the current case reports.
 
-This will be the first in-depth analysis of early studies of this novel variant, which aims to produce statistical findings to better describe and understand this condition. This research is significant as it will assist clinicians understand the typical and non-typical presentations of this challenging new condition. In addition, genetic counselling of families with affected children will benefit from enhanced analysis on outcomes of existing reported cases.
+This will be the first in-depth analysis of early studies of this novel variant, which aims to produce statistical findings to better describe and understand this condition. This research will assist clinicians understand the typical and non-typical presentations of this challenging new condition. In addition, genetic counselling of families with affected children will benefit from enhanced analysis on outcomes of existing reported cases.
 
-## Methods
+# Methods
 
-### SMPD4 Data Package
+## SMPD4 Data Package
 
 The data contained in @magini2019loss "Summary of SMPD4-Related Clinical Phenotype" is an excel spreadsheet tabulating each of the 21 individuals from the study with clinical details recorded. The file has 21 columns (one for each individual), and 64 rows (one for each phenotype or clinical remark).
 
@@ -116,6 +61,8 @@ The data were transposed to ensure it could be presented as *tidy* formatted dat
 2.  Each observation (individual) forms a row.
 3.  Each type of observational unit forms a table (every cell has just one item)
 
+This resulted in a long-formatted data set of 21 rows (individuals) and 64 columns (clinical features).
+
 In many cases, key clinical information was entered as free-text descriptions, which rendered any attempt of meaningful analysis impractical (@tbl-nontidy). In these cases, the text was tokenised by separating the list of clinical observations at each comma and forming a binary indicator column noting its presence '1' or absence '0' (@tbl-tidy).
 
 |                     | Family 1- Individual 1                                                                                     | Family 1- Individual 4                                      |
@@ -124,14 +71,14 @@ In many cases, key clinical information was entered as free-text descriptions, w
 
 : Example of non-tidy free-text descriptions of features {#tbl-nontidy}
 
-| id                     | short palpebral fissures | large ears | simple helices | receding forehead | ... |
-|------------|------------|------------|------------|------------|------------|
+| id                     |      short palpebral fissures       | large ears | simple helices | receding forehead | ... |
+|------------------------|-----------------|-------|--------|-------|-------|
 | Family 1- Individual 1 | 1                        | 1          | 0              | ...               |     |
 | Family 1- Individual 4 | 1                        | 0          | 0              | 1                 | ... |
 
 : Example of tidy formatted data where individuals are transposed into rows and text into binary indicators {#tbl-tidy}
 
-In the case where two variables were formed from phenotypes that are considered to be synonymous, these were merged into one indicator column to prevent duplication e.g. {bilateral_cleft_lips, bilateral_cleft_lip, cleft_lip_b\_l}.
+In the case where two variables were formed from phenotypes that are considered to be synonymous, these were merged into one indicator column to prevent duplication e.g. {bilateral_cleft_lips, bilateral_cleft_lip, cleft_lip_b\_l} -\> {bilateral_cleft_lip}.
 
 Some data type conversion and categorical level standardisation was performed to ensure the data were in consistent and appropriate data types. For example, 'Gender' was not consistently coded, and 'Birth Weight' was encoded as a text string rather than a more useful numeric format. (@tbl-data-types).
 
@@ -144,23 +91,28 @@ Some data type conversion and categorical level standardisation was performed to
 
 : Example of inconsistent coding or sub-optimal data types {#tbl-data-types}
 
-The final dataset consisted of 21 observations (one per individual) and 152 variables (one per clinical feature).
+| Gender | Birth Weight (g) |
+|--------|------------------|
+| male   | 2175             |
+| female | 2045             |
+| female | 2300             |
+| female | NA               |
 
-This format was preserved and other case studies identified in the literature [@ravenscroft2021neurogenetic; @monies2019lessons; @bijarnia2022growth; @ji2022case] were manually entered to conform to this template to allow the data to be combined for further analysis.
+: Example of consistent and appropriate coding or data types {#tbl-data-types2}
 
-These data sets were packaged into an R Package called SMPD4 [@smpd4-data] in order to allow for reproducibility and sharing. This can be downloaded and installed from github at <https://github.com/deanmarchiori/SMPD4>.
+This format was preserved and other case studies identified in the literature [@ravenscroft2021neurogenetic; @monies2019lessons; @bijarnia2022growth; @ji2022case] were manually entered to conform to this template to allow the data to be combined for further analysis.  
 
-### Multiple Correspondence Analysis
+The final dataset consisted of 21 observations (one per individual) and 152 variables (one per clinical feature). In some cases, were obvious, these variables were left as qualitative character descriptions, in other cases as noted above, distinct lists of features were tranformed into binary indicators. Other fields include background information on the patient and various biomarkers. A full list of this data set is available in @tbl-dict. These data sets were packaged into an R Package called SMPD4 [@smpd4-data] in order to allow for reproducibility and sharing.
 
-Multiple Correspondence Analysis (MCA) is an analogy to Principle Component Analysis (PCA) for categorical data [@le2010multiple].
+## Multiple Correspondence Analysis
 
-We let a data set $\mathbf{X}$ be comprised of a set of individuals $I$ and a set of features $Q$ such that the $q_{th}$ feature has $K_q$ levels. The sum of all categories $K = \sum_{q=1}^{Q}K_q$ defines the dimensionality of $\mathbf{X}$ as an $I\times K$ matrix.
+The data on subjects introduced above is subset to include only variables that can be transformed into binary indicator variables that represent the presence or absence of a given clinical feature column. Only those features that appeared in more than one case were included to minimise the influence of non-related features in this analysis.   
 
-Taking $\delta_{ik} = 1$ if subject $i$ has feature $k$ and $\delta_{ik} = 0$ if the subject does not, we are left with the completely disjnuctive table $\mathbf{X} = I\times K$ of $\{0,1\}$. Letting the sum of all entries of $\mathbf{X}$ be $N$, we have $\mathbf{Z} = N^{-1}\mathbf{X}$.
+Dimension reduction on this wide data set was performed using Multiple Correspondence Analysis (MCA) [@le2010multiple] in order to arrive at a set of meaningfully small dimensions that account for most of the variation in the data. Multiple Correspondence Analysis (MCA) is an analogy to Principle Component Analysis (PCA) for categorical data. 
 
-We can introduce two diagonal matricies $\mathbf{D_r} = diag(\mathbf{r})$ and $\mathbf{D_c} = diag(\mathbf{c})$ where $\mathbf{r}$ and $\mathbf{c}$ are the vectors of row sums and column sums of $\mathbf{Z}$ respectively.
+We let these data be $\mathbf{X}$ which is comprised of a set of individuals $I$ and a set of features $Q$ such that the $q_{th}$ feature has $K_q$ levels. The sum of all categories $K = \sum_{q=1}^{Q}K_q$ defines the dimensionality of $\mathbf{X}$ as an $I\times K$ matrix. This resulted in a dataset $X_{28 \times 61}$ indicator matrix of 61 clinical features across 28 individuals. Taking $\delta_{ik} = 1$ if subject $i$ has feature $k$ and $\delta_{ik} = 0$ if the subject does not, we are left with the completely disjnuctive table $\mathbf{X} = I\times K$ of $\{0,1\}$. Letting the sum of all entries of $\mathbf{X}$ be $N$, we have $\mathbf{Z} = N^{-1}\mathbf{X}$. We can introduce two diagonal matricies $\mathbf{D_r} = diag(\mathbf{r})$ and $\mathbf{D_c} = diag(\mathbf{c})$ where $\mathbf{r}$ and $\mathbf{c}$ are the vectors of row sums and column sums of $\mathbf{Z}$ respectively.
 
-Computing MCA involves taking the Singular Value Decomposition of:
+Computing MCA involves taking the Singular Value Decomposition:
 
 $$
 \mathbf{M = D_r^{-\frac{1}{2}}(Z-rc^T)D_c^{-\frac{1}{2}}} = \mathbf{P}\Delta\mathbf{Q^T}
@@ -169,34 +121,43 @@ $$ where $\Delta$ are the singular values and $\Lambda = \Delta^2$ is the matrix
 This results in the row and column factor scores respectively as:
 
 $$
-\mathbf{F} = \mathbf{D_r^{-\frac{1}{2}}P}\Delta 
-$$
-
-$$
+\begin{split}
+\mathbf{F} = \mathbf{D_r^{-\frac{1}{2}}P}\Delta \\
 \mathbf{G = D_c^{-\frac{1}{2}}Q}\Delta
+\end{split}
 $$
 
-The combined clinical phenotype data was subsetted to include only those features that were encoded as a binary indicator variable.
+This computation of the Multiple Correspondence Analysis was computed using the *FactoMineR* R package [@factominer].  
 
-Only those features that appeared in more than one case were included to minimise the influence of non-related features in this analysis.
+The *contribution* of each category is computed for each of the principal axis per @le2010multiple. This metric identifies the proportion of variance of that axis due to the point and is defined as:
 
-This resulted in a dataset $X_{28 \times 61}$ indicator matrix of 61 clinical features across 28 individuals.
+$$
+Ctr_k = \frac{py_k^2}{\lambda}
+$$
+Where $p$ represents the point weighting, $y$ is the coordinate relative to the principal axes of variance $\lambda$.
 
-\[NEED TO INCLUDE CONTRIBUTION\]
 
-Multiple Correspondence Analysis was then computed using the *FactoMineR* R package [@factominer].
+## Cluster Analysis
 
-### Cluster Analysis
+The MCA coordinates for the first 4 principal dimensions were subject to clustering in order to find groups of features
+that were internally homogeneous and externally heterogeneous. This was computed in R using the clValid package [@clvalid].
 
-\[insert clvalid details\]
+A sensible range of clusters were trialed ranging from 2 to 7. Each of these settings were trialled across a range of clustering
+algorithms including AGNES hierarchical agglomerative [@kaufman2009finding], Kmeans [@hartigan1979algorithm] and self-organising maps (SOM) [@kohonen2012self].    
 
-### Survival Analysis
+The results for each method were evaluated using three internal cluster validation measures, Connectivity [@handl2005computational], Sihouette width [@rousseeuw1987silhouettes] and Dunn Index [@dunn1974well].
+
+The optimal method and cluster number was selected based on a trade off between the best performing method using the evaluation metrics
+and a sensible partioning of the data for this analysis.  
+
+
+## Survival Analysis
 
 To model survival probability for all subjects in the combined data, the data are subsetted to include *survival_time* which is either the number of days the individual survived for, or the age in days at last follow up, and *deceased* a numeric indicator which is equal to 1 if the subject is deceased and 0 otherwise.
 
 The Kaplan-Meier estimator [@kaplan1958nonparametric] is used to estimate the survival function of the data.
 
-The estimator is calcualted as:
+The estimator is calculated as:
 
 $$
 \hat{S}(t) = \prod_{t_i \leq t}\frac{n_i - d_i}{n_i} 
@@ -208,13 +169,13 @@ Next the Kaplan-Meier estimator was calculated, \[ON WHAT?\] stratified by the r
 
 Finally, a Cox proportional hazards regression model [@andersen1982cox] was fit on survival time with the variant type as the sole covariate. This was to detect and measure the Hazard ratio of variant type on the survival time in order to test the hypothesis that misense variant types exhibit significantly greater survival compared to other variant types.
 
-## Results
+# Results
 
-### MCA
+## MCA
 
 The initial results of the MCA were inspected with a bi-plot and identified two individuals (17, 18) from the data that were clear outliers and sat significatly beyound the 95% confidence ellipse. These individuals represented two twins from @magini2019loss who were described with a much milder phenotype and wer subject to a missense variation in SMPD4. Further analysis of this influence is conducted below. For now, these subjects were removed to allow for more meaningful analysis.
 
-Repeating MCA for the remaining subjects shows the first dimension ($\lambda_! = 0.18$) accounts for 17.88% of the variance in the data with the first 4 dimensions of the MCA analysis accounting for 54% of the variance.
+Repeating MCA for the remaining subjects shows the first dimension ($\lambda_! = 0.18$) accounts for 17.88% of the variance in the data with the first 4 dimensions of the MCA analysis accounting for 54% of the variance (@tbl-eig).
 
 ```{r}
 tar_load(mca_prelim)
@@ -245,12 +206,23 @@ fviz_mca_biplot(
 ```
 
 ```{r}
+#| label: tbl-eig
+#| tbl-cap: Eigenvalues and percentage of variance explained by the MCA principal axes
+
 ### MCA  
 tar_load(mca)
 
-# eigenvalue summary 
 mca$eig |> 
-  kable(digits = 2, caption = "eigenvalues and percentage of variance explained by the MCA principal axes")
+  tibble::as_tibble(rownames = 'dimension') |> 
+  gt() |> 
+  fmt_number(columns = 2,
+             decimals = 2) |> 
+  fmt_percent(columns = c(`percentage of variance`, `cumulative percentage of variance`),
+              scale_values = F) |> 
+   tab_header(
+    title = "MCA Eigenvalue Table",
+    subtitle = "Percentage variance explained by MCA for each dimension"
+  )
 ```
 
 The *contribution* of the categories were ranked within each of the first four MCA dimensions See @fig-ctr.
@@ -333,7 +305,7 @@ fviz_mca_biplot(
 
 ```
 
-### Cluster Analysis
+## Cluster Analysis
 
 ```{r}
 ### Clustering 
@@ -354,44 +326,38 @@ A cluster relating to structual brain anomalies is articulated with conditions s
 Some smaller satellite clusters exists where highly distinctive features were associated with an indivual or family. Also a singleton clusters exist for features that are distinct or unusual such as posteriorly angulated ears.
 
 ```{r}
-cluster_select@measures |> 
-  as_tibble(rownames = 'measure') |> 
-  pivot_longer(cols =  -measure, names_to = 'cluster', values_to = "metric") |> 
-  mutate(`optimal cluster no.` = as.numeric(str_remove(cluster, ".hierarchical")))  |> 
-  select(-cluster) |> 
-  group_by(measure) |> 
-  filter(metric == min(metric)) |> 
-  kable(digits = 2, caption = "Optimal cluster numbers determined by four similar metrics measuring cluster analysis performance.")
+#| label: tbl-opticlust
+#| tbl-cap: "Optimal clusters"
+optimalScores(cluster_select) |> 
+  as_tibble(rownames = 'Metric') |> 
+  gt() |> 
+  fmt_number(columns = Score, decimals = 2)
 ```
 
 ```{r, fig.width=8,  warning=FALSE}
 #| label: fig-clvalid
 #| fig-cap: "cluster validation analysis showing various metrics for cluster evaluation from 2 to 10 clusters. The most optimal number of clusters are selected by picking the lowest value from one or many of these compariable metrics."
-cluster_select@measures |> 
-  as_tibble(rownames = 'measure') |> 
-  pivot_longer(cols =  -measure, names_to = 'cluster', values_to = "metric") |> 
-  mutate(cluster = as.numeric(str_remove(cluster, ".hierarchical"))) |> 
-  ggplot(aes(cluster, metric, colour = measure, group = measure)) +
+
+cluster_select@measures |>
+  as_tibble(rownames = 'measure') |>
+  pivot_longer(cols =  -measure, names_to = 'cluster', values_to = "metric") |>
+  separate(col = cluster, into = c('k', 'method'), sep = "\\.") |> 
+  mutate(k = as.numeric(k)) |>
+  ggplot(aes(k, metric, colour = method)) +
   geom_line() +
   labs(x = 'number of clusters') +
   facet_wrap(~measure, scales= 'free')
 ```
 
-```{r, fig.height=12, fig.width=10}
-#| label: fig-dendro
-#| fig-cap: "Dendrogram of heirarchical clustering method"
-plot(clustering, which.plots = 2, main = NA, sub = NA, xlab = NA)
-```
-
 ```{r, fig.height=8, fig.width=8,  warning=FALSE}
 #| label: fig-clust
 #| fig-cap: "A projection of features on the first two principal components with cluster assignment indicated by colour."
-cbind(cluster_data, clust = cluster_assignments) |> 
+cbind(cluster_data, clust = factor(cluster_assignments)) |> 
   rownames_to_column(var = 'var') |> 
   as_tibble() |> 
   arrange(var, clust) |> 
   ggplot(aes(dim_1, dim_2, colour = clust)) +
-    geom_vline(xintercept = 0, lty = 2, colour = "grey50") +
+  geom_vline(xintercept = 0, lty = 2, colour = "grey50") +
   geom_hline(yintercept = 0, lty = 2, colour = "grey50") +
   geom_label_repel(aes(label = var), size = 2, max.overlaps = 20) +
   geom_point(aes(colour = clust), position = "jitter") +
@@ -400,7 +366,7 @@ cbind(cluster_data, clust = cluster_assignments) |>
        colour = 'cluster')
 ```
 
-### Survival Analysis
+## Survival Analysis
 
 ```{r}
 ### Survival
@@ -417,7 +383,7 @@ x <- survminer::surv_summary(kapm_baseline, data = survival_data)
 kable(x, digits = 2, caption = "Survival probabilities derived from Kaplan-Meier estimation. ")
 ```
 
-```{r, fig.height=8, fig.width=8,  warning=FALSE}
+```{r, warning=FALSE}
 #| label: fig-surv
 #| fig-cap: "Kaplan Meier survival curve"
 survminer::ggsurvplot_df(x,
@@ -436,7 +402,7 @@ survminer::ggsurvplot_df(x,
 
 A comparitive boxplot of survival times by variant type shows significant outliers for missense+splice and missense variations. However, even within missense hymozygous variants the survival time varies greatly. Other missense variants, such as heterozygous missense with gene deletion do not show the same increased survival time as indeed noted by @magini2019loss.
 
-```{r, fig.height=8, fig.width=8,  warning=FALSE}
+```{r, warning=FALSE}
 # KM by variant
 
 # box plot of variant 
@@ -452,9 +418,7 @@ tar_load(logrank)
 logrank
 ```
 
-## Discussion
-
--   the relationship between the results and the original hypothesis, i.e., whether they support the hypothesis, or cause it to be rejected or modified
+# Discussion
 
 The Multiple Correspondence Analysis confirmed the heterogeneous variation in the data with the first four princicple components being required to explain more than 50% of the variation in the dataset.
 
@@ -478,10 +442,16 @@ The survival of indivuduals with this condition is critical given early demise i
 
 \newpage
 
-## Appendix
+# Appendix
 
 ```{r}
-16/28
+#| label: tbl-dict
+#| tbl-cap: Data dictionary of the final dataset used for the analysis. This combines the case reports and supplied data for available and references studies. The data has been transformed into a tidy format with formatting applied. 
+tar_load(subjects)
+make_data_dictionary(subjects)
+```
+
+```{r}
 # Profile table 
 cbind(cluster_data, clust = cluster_assignments) |> 
   rownames_to_column(var = 'var') |> 
@@ -493,4 +463,4 @@ cbind(cluster_data, clust = cluster_assignments) |>
 
 \newpage
 
-## References
+# References

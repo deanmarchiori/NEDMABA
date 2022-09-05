@@ -1,10 +1,10 @@
 name|type|data|command|depend|seed|path|time|size|bytes|format|repository|iteration|parent|children|seconds|warnings|error
-.Random.seed|object|d9c29b7888737349|||||||||||||||
+.Random.seed|object|6d5f2597907d44db|||||||||||||||
 cluster_assign|stem|8ffa90ffdb09240d|d8528a146aa27138|bd4be89c7c6dc9bf|1997281000||t19232.4142747313s|155dcb23a3dc3cf4|236|rds|local|vector|||0.001||
-cluster_assignments|stem|5fe384adb9f26c2d|20760e42ed42dfd2|f6b2c2c3dbcfd9a6|-1377731317||t19235.4193605s|6935d04907feb3d2|146|rds|local|vector|||0.001||
-cluster_data|stem|37bae184b736d604|397db77200c6699c|0bfc3876a520b661|-610343225||t19235.4159596903s|33099e7542100811|1589|rds|local|vector|||0.06||
-cluster_select|stem|1196d0438a28619c|dba6c091c72a86e1|18fc860755c15354|1132699111||t19235.4171479257s|8b788b243a3a49f7|2215|rds|local|vector|||0.053||
-clustering|stem|bbeed7ea1c9b4a3b|eb78d17c1fff8d2b|3a4521c0193982db|2138518292||t19235.4159608014s|62bd1e7bc111e22a|10293|rds|local|vector|||0.001||
+cluster_assignments|stem|a7b732e8528b92da|3d9b59ee55611bc9|2d3a36e2023eca50|-1377731317||t19238.4490208898s|938fc0a6010d13b8|756|rds|local|vector|||0.001||
+cluster_data|stem|a4cd3c4186b9990a|79509be93f54cf0f|0bfc3876a520b661|-610343225||t19238.4117248746s|2e45baceaacabf03|2325|rds|local|vector|||0.077||
+cluster_select|stem|dac2e7ab90d56032|7d4dc4f8fc0d19a9|6d9ca481e6dc493b|1132699111||t19238.4490205194s|7347f2a17caeb6c1|18783|rds|local|vector|||0.268|Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library.... Added defaults for somgrid object  you are probably using the somgrid function from the class library...|
+clustering|stem|667a0534932bf42a|d13ebda33c2f7295|ee8632af5201d351|2138518292||t19238.4490207509s|b9dab6d348763ccb|1290|rds|local|vector|||0.004||
 clusters|stem|223caef34796372d|9c36845a0ad6df4b|b70ecdedd9a718cb|1240830349||t19232.4142746387s|c91a6b892b3e25c8|681|rds|local|vector|||0.004||
 cor_plot|stem|bd4ea28d61ff5bf3|ddedcbfa977eb04d|d79e0285d152fee7|-715809824||t19227.1646388231s|c0dcd4d49bcd05d5|8687|rds|local|vector|||0.084||
 correlations|stem|ca1239720b175c8f|cb2f9e43aee71830|a0ebaf76bcf0bd99|-866504152||t19229.0376096908s||4720|rds|local|vector|||0.006||x must be numeric
@@ -14,6 +14,7 @@ kapm|stem|11cae55f6cced3ba|42c622269449ad9a|5c54f4bf7ee45d02|-1829117226||t19233
 kapm_baseline|stem|12f87d3cda04312e|855212d5a7e0d279|12f57982ef43051e|1127922315||t19233.1883213746s|92ce8485ff7a0e53|1183|rds|local|vector|||0.001||
 loadings|stem|cc49ee14e327c4d0|df83ced0d47a8978|7f82db5678bee21d|1092843558||t19229.0376102927s|ce517f10517ef99b|67509|rds|local|vector|||0.012||
 logrank|stem|8e366ed907248f27|aef4c9edc626f250|7cc3f5452b143840|571043329||t19233.1883215135s|b1b5493d247e5e22|829|rds|local|vector|||0.005||
+make_data_dictionary|function|b72fb9a8a3313bdb|||||||||||||||
 mca|stem|007f475846129b5e|101a6b0cce280178|40b51ff99fb97654|1336427768||t19235.4093925882s|d8e39243fc289634|24928|rds|local|vector|||0.043||
 mca_data|stem|16ac299a3ec73b06|06a2ebed79ca93a1|a93fecd690879902|492406433||t19235.4093907363s|e35c335e7337e1d4|1180|rds|local|vector|||0.08||
 mca_data_prelim|stem|d57165093121414c|92afbccc15459398|cacfec699da80ff1|-203876141||t19235.4093918474s|b433b64297ce9973|1330|rds|local|vector|||0.09||
@@ -29,7 +30,7 @@ prep_pca_data|function|9c472ecdb504dc72|||||||||||||||
 prep_subjects_data|function|fb7f7bc030b20650|||||||||||||||
 prep_survival_data|function|42b110e0451e560c|||||||||||||||
 reorder_within|function|971b844d2a766697|||||||||||||||
-report|stem|3255d55d6ac4fe06|ccb9af3fd2b56a85|a3c077284ac9feed|-237041703|paper_draft.pdf*paper_draft.qmd|t19236.2454903321s|fbbb3905d1ade0e1|198879|file|local|vector|||19.294||
+report|stem|3fd523338e0056de|11441924a2f72d9c|84eb550a2a7df202|-237041703|paper.pdf*paper.qmd|t19240.163316836s|fe3974363f01e331|205841|file|local|vector|||18.464||
 scale_x_reordered|function|175eff2cab6886a3|||||||||||||||
 scale_y_reordered|function|6eed00fd98320789|||||||||||||||
 scores|stem|1eb5f10d878d36b5|0ff42bc600bd14e3|eea3e1179d540b95|-1359168496||t19229.0376108019s|495ab130fc480d5d|74248|rds|local|vector|||0.008||
