@@ -1,6 +1,12 @@
 ---
 title: "Statistical Analysis of Clinical Phenotype and Patient Survival in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies"
-author: "Dean Marchiori"
+author:
+  - id: dm
+    number: 1
+    name: Dean Marchiori
+    email: deanmarchiori@gmail.com
+    corresponding: TRUE
+date: "September 2022"
 format: pdf
 abstract: "A recently described, rare genetic condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) has been identified in children with bi-allelic loss-of-function variants in *SMPD4*. The progression of this condition is not well understood with the limited case reports described so far exhibiting a severe and clinically diverse phenotype. A gap exists in the understanding the associations of the heterogenous features present in the clinical phenotype and the expected survival probabilities of affected individuals. This is driven in part to the paucity of analysis-ready data in reported cases. This research aims to collate and standardise available case reports to analyse and identify meaningful clusters in the clinical phenotype, and to quantify the survival probability for children with NEDMABA. To overcome the challenge of sparse, multidimensional data on very few subjects, we employ Multiple Correspondence Analysis (MCA) as a dimension reduction technique, which is then subject to cluster analysis and interpretation. To quantify more accurate survival probabilities, Kaplan-Meier estimation is formulated to account for censoring in the data. The analysis identified the classic phenotype for this condition, as well as one other distinct feature cluster relating to findings of vocal cord paralysis and respiratory failure. The survival probability for those affected was found to decline sharply in early infancy with median survival of 150 days, but with some as high as 12.5 years. This wide range of outcomes is provisionally associated with variant type however interpretation of these results are guarded based on very low sample sizes. Despite challenges with sparse and inconsistent data, this analysis represents the first of its kind to help describe associations and trajectories of individuals with this condition and can provide clinicians and genetic counsellors with better information to aide in decision making and support for families."
 editor: visual
@@ -55,13 +61,13 @@ The data contained in @magini2019loss "Summary of SMPD4-Related Clinical Phenoty
 The data were read into `R` [@rbase] without any changes, so as to preserve the reproducibility of the data transformation steps. The data were transposed to ensure it could be presented as *tidy* formatted data [@JSSv059i10]. This requires each variable (clinical phenotype) forms a column; each observation (individual) forms a row and each type of observational unit forms a table (every cell has just one item). This resulted in a long-formatted data set of 21 rows (individuals) and 64 columns (clinical features). In many cases, key clinical information was entered as free-text descriptions, which rendered any attempt of meaningful analysis impractical (@tbl-nontidy). In these cases, the text was tokenised by separating the list of clinical observations at each comma and forming a binary indicator column noting its presence '1' or absence '0' (@tbl-tidy).
 
 |                     | Family 1- Individual 1                                                                                     | Family 1- Individual 4                                      |
-|---------------|-------------------------------------|--------------------|
+|------------------|-----------------------------------|-------------------|
 | Facial dysmorphisms | short palpebral fissures, large ears, simple helices, smooth philtrum, thin lips, bilateral simian creases | short palpebral fissures, receding forehead, thin upper lip |
 
 : Example of non-tidy free-text descriptions of features {#tbl-nontidy}
 
 | id                     | short palpebral fissures | large ears | simple helices | receding forehead | ... |
-|------------|-------------|------------|------------|------------|------------|
+|------------|------------|------------|------------|------------|------------|
 | Family 1- Individual 1 | 1                        | 1          | 1              | 0                 | ... |
 | Family 1- Individual 4 | 1                        | 0          | 0              | 1                 | ... |
 
@@ -134,7 +140,7 @@ A range of clustering algorithms were compared including AGNES hierarchical aggl
 
 ## Survival Analysis
 
-To model survival probability for all subjects in the combined data, the data were subsetted to include *survival_time* which is either the number of days the individual survived for, or the age in days at last follow up, and *deceased* a numeric event indicator which is equal to 1 if the subject is deceased and 0 if the subject was still alive at the time the respective study had concluded.  The Kaplan-Meier estimator [@kaplan1958nonparametric] was used to estimate the survival function of the data.
+To model survival probability for all subjects in the combined data, the data were subsetted to include *survival_time* which is either the number of days the individual survived for, or the age in days at last follow up, and *deceased* a numeric event indicator which is equal to 1 if the subject is deceased and 0 if the subject was still alive at the time the respective study had concluded. The Kaplan-Meier estimator [@kaplan1958nonparametric] was used to estimate the survival function of the data.
 
 The estimator is calculated as:
 
@@ -293,12 +299,11 @@ tar_load(cluster_assignments)
 
 Cluster validation measures resulted in either 2 or 5 clusters as the optimal choice.
 
-In order to partition the data into meaningful groupings, k-means with 5 clusters was selected. This reflects the optimal choice for both AD and FOM cluster metrics. 
+In order to partition the data into meaningful groupings, k-means with 5 clusters was selected. This reflects the optimal choice for both AD and FOM cluster metrics.
 
 A scatter plot of the cluster results @fig-clust projected on just the first two dimensions highlights a core cluster of classic features of NEDMABA such as microcephaly, hypomyelination, arthrogryposis and feet deformity and structural brain anomalies. A separate cluster is formed of airway and feeding related conditions involving vocal cord paralysis, tracheostomy, tube feeding and enlarged ventricles.
 
 Three other smaller satellite clusters exists where highly distinctive features were associated with an individual or family. A full articulation of feature to cluster assignment is given in @tbl-profile.
-
 
 ```{r}
 #| label: tbl-opticlust
@@ -413,21 +418,19 @@ tar_load(logrank)
 
 # Discussion
 
-The use of Multiple Correspondence Analysis confirmed the heterogeneous variation in the data with the first four principal axes being required to explain more than 50% of the variation in the data set. The examination of key contributing factors, as well as a visual inspection of the data projected into this lower dimensional space indicate the primary sources of variation in the clinical phenotype are explained by a few individuals with very different clinical features. This has confounded the typical or classical presentation. 
+The use of Multiple Correspondence Analysis confirmed the heterogeneous variation in the data with the first four principal axes being required to explain more than 50% of the variation in the data set. The examination of key contributing factors, as well as a visual inspection of the data projected into this lower dimensional space indicate the primary sources of variation in the clinical phenotype are explained by a few individuals with very different clinical features. This has confounded the typical or classical presentation.
 
-The cluster analysis does not aim to group individuals that are alike, but rather the clinical features themselves and how these contrasting clusters account for variation in the data. This highlights common sources of variation on the clinical phenotype of the condition itself, rather than typical coincident features of any one child. 
+The cluster analysis does not aim to group individuals that are alike, but rather the clinical features themselves and how these contrasting clusters account for variation in the data. This highlights common sources of variation on the clinical phenotype of the condition itself, rather than typical coincident features of any one child.
 
 After excluding two outlying, remarkable cases this analysis clearly identifies the hallmark features of microcephaly, hypomyelination, arthrogryposis, simplified gyral pattern and developmental delay. Of significant note is the presence of an adjacent cluster of related features that are not as well described in The Human Phenotype Ontology [@kohler2021human] as shown in @tbl-hpo. We identify a prolific feature of 'respiratory distress' as an expression more associated with other features such as vocal cord palsy, tracheostomy, tube feeding and GERD which are present in the case reported data, but not well described in HPO. This represents a related but distinct grouping of severe features that associated with this condition.
 
-Other cluster groupings identify outlying features that are expressed in individuals or specific families. Many of the outlying features are specific facial or anatomical dysmorphisms. While course facial features are a noted and core feature, those with a milder course had clinical reports that articulated these dysmorphisms in much more detail. On a similar note, the reporting of 'talipes' as a condition which seems distinct as a source of variation appearing as an isolated feature without the typical microcephaly and hypomyelination. However, there was significant heterogeneity in how feet contractures were reported in clinical case reports. In the data pre-processing, a separate feature was created for reported cases with rocker bottom feet or congenital vertical talus versus those with clubfeet/talipes. In practice its not clear how these diagnoses were arrived at, and given the non-specific nature of this feature, care needs to be taken in distinguishing between similar manifesting features in the literature where possible. This is particularly clear as rocker bottom feet was found closely related in our analysis to other core features despite the prevalence in HPO being quite low (2/21), suggesting possible under-reporting or confounded reporting of this feature. Another feature that clusters within the core identified features is bilateral cleft lip. This condition has a reported frequency of just 2/21 (@tbl-hpo) and may be an emerging feature for a more typical presentation given its close relationship with other classic features. Not all features in the data were included in this analysis, particular if isolated to just one case. In this circumstance, these terms in @tbl-hpo have been labelled as 'Isolated'. 
+Other cluster groupings identify outlying features that are expressed in individuals or specific families. Many of the outlying features are specific facial or anatomical dysmorphisms. While course facial features are a noted and core feature, those with a milder course had clinical reports that articulated these dysmorphisms in much more detail. On a similar note, the reporting of 'talipes' as a condition which seems distinct as a source of variation appearing as an isolated feature without the typical microcephaly and hypomyelination. However, there was significant heterogeneity in how feet contractures were reported in clinical case reports. In the data pre-processing, a separate feature was created for reported cases with rocker bottom feet or congenital vertical talus versus those with clubfeet/talipes. In practice its not clear how these diagnoses were arrived at, and given the non-specific nature of this feature, care needs to be taken in distinguishing between similar manifesting features in the literature where possible. This is particularly clear as rocker bottom feet was found closely related in our analysis to other core features despite the prevalence in HPO being quite low (2/21), suggesting possible under-reporting or confounded reporting of this feature. Another feature that clusters within the core identified features is bilateral cleft lip. This condition has a reported frequency of just 2/21 (@tbl-hpo) and may be an emerging feature for a more typical presentation given its close relationship with other classic features. Not all features in the data were included in this analysis, particular if isolated to just one case. In this circumstance, these terms in @tbl-hpo have been labelled as 'Isolated'.
 
 While the number of clusters chosen all represent valid partition of the data, some metrics indicated an optimal selection of 2 clusters. This type of partition is useful when segregating outliers from the rest of the data and is valid in some applications. In this study, a larger number was selected to align the goals of the analysis which was to uncover distinct groups of features.
 
 In terms of patient survival, the first few months show a sharp decline in survival probability confirming early demise in the infant period as a key factor. A small number of cases show much longer survival into the childhood and in some cases into the second decade of life. This work identifies a one year survival rate of 0.403 (0.252, 0.644). A naive estimate, using just the number of deceased patients at this time as proportion of the study population is 0.57. This highlights the importance of applying a survival analysis technique that incorporates censoring so as not to erroneously overestimate the survival probability. The current literature suggests the type of gene variant has an impact on survival time, which seems to be supported in this work. Through a comparison of multiple survival curves, stratified by variation type, the limited sample size prevented other meaningful analysis such as log-rank tests or cox proportional hazard modelling which are likely under-powered when comparing multiple groups.
 
 Despite NEDMABA exhibiting a diverse and heterogeneous clinical phenotype, our analysis was able to identify meaningful substructures in this data through the use of dimension reduction techniques (MCA) and cluster analysis. This has isolated the classic NEDMABA phenotype of microcephaly, hypomyelination, arthrogryposis, simplified gyral pattern and developmental delay. Furthermore it has isolated additional distinct groupings of features that are exhibited in patients such as vocal cord paralysis with tracheostomy, swallowing dysfunction, tube feeding and GERD. Furthermore, we were able to quantify the expected baseline survival probabilities for children with this condition as well as quantifying the significant variation in these estimates. Future work is required with the benefit of more cases, to better understand the differences in survival curves for other factors associated with genotype.
-
-
 
 ```{r}
 #| label: tbl-hpo
@@ -507,8 +510,6 @@ hpo |>
     locations = cells_column_labels(columns = "Cluster")
   )
 ```
-
-
 
 \newpage
 

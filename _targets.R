@@ -44,7 +44,7 @@ list(
   tar_target(cox_ph, coxph(Surv(survival_time, deceased) ~ variant, data = survival_data)),
 
   # Render Report
-  tar_quarto(report, path = "paper.qmd")
+  tar_quarto(report, path = "test/paper.qmd")
 )
 
 
