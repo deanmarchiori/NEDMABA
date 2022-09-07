@@ -6,7 +6,7 @@ A recently described, rare genetic condition known as Neurodevelopmental Disorde
 
 ## Download full paper
 
-[paper.pdf](https://github.com/deanmarchiori/NEDMABA/raw/bd08c65f68168b51784b92deb1d2c73be26872ba/paper/paper.pdf)
+[paper.pdf](/paper/paper.pdf)
 
 ## Reproducibility
 
