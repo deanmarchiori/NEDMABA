@@ -5,7 +5,7 @@ library(tarchetypes)
 tar_option_set(
   packages = c("SMPD4", 'clValid', 'tidyverse', 'ggrepel', 
                'cluster', 'survival', 'survminer', 'quarto',
-               'knitr', 'FactoMineR', 'factoextra', 'gt', 'withr'), 
+               'knitr', 'FactoMineR', 'factoextra', 'gt', 'withr', 'kohonen'), 
   format = "rds" 
 )
 
