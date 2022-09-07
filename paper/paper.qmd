@@ -1,18 +1,27 @@
 ---
-title: "Statistical Analysis of Clinical Phenotype and Patient Survival in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies"
+title: Statistical Analysis of Clinical Phenotype and Patient Survival in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies
 author:
-  - id: dm
-    number: 1
-    name: Dean Marchiori
+  - name: Dean Marchiori
     email: deanmarchiori@gmail.com
-    corresponding: TRUE
-date: "September 2022"
-format: pdf
-abstract: "A recently described, rare genetic condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) has been identified in children with bi-allelic loss-of-function variants in *SMPD4*. The progression of this condition is not well understood with the limited case reports described so far exhibiting a severe and clinically diverse phenotype. A gap exists in the understanding the associations of the heterogenous features present in the clinical phenotype and the expected survival probabilities of affected individuals. This is driven in part to the paucity of analysis-ready data in reported cases. This research aims to collate and standardise available case reports to analyse and identify meaningful clusters in the clinical phenotype, and to quantify the survival probability for children with NEDMABA. To overcome the challenge of sparse, multidimensional data on very few subjects, we employ Multiple Correspondence Analysis (MCA) as a dimension reduction technique, which is then subject to cluster analysis and interpretation. To quantify more accurate survival probabilities, Kaplan-Meier estimation is formulated to account for censoring in the data. The analysis identified the classic phenotype for this condition, as well as one other distinct feature cluster relating to findings of vocal cord paralysis and respiratory failure. The survival probability for those affected was found to decline sharply in early infancy with median survival of 150 days, but with some as high as 12.5 years. This wide range of outcomes is provisionally associated with variant type however interpretation of these results are guarded based on very low sample sizes. Despite challenges with sparse and inconsistent data, this analysis represents the first of its kind to help describe associations and trajectories of individuals with this condition and can provide clinicians and genetic counsellors with better information to aide in decision making and support for families."
-editor: visual
-bibliography: refs.bib
+    attributes:
+        corresponding: true
+abstract: |
+  A recently described, rare genetic condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) has been identified in children with bi-allelic loss-of-function variants in *SMPD4*. The progression of this condition is not well understood with the limited case reports described so far exhibiting a severe and clinically diverse phenotype. A gap exists in the understanding the associations of the heterogenous features present in the clinical phenotype and the expected survival probabilities of affected individuals. This is driven in part to the paucity of analysis-ready data in reported cases. This research aims to collate and standardise available case reports to analyse and identify meaningful clusters in the clinical phenotype, and to quantify the survival probability for children with NEDMABA. To overcome the challenge of sparse, multidimensional data on very few subjects, we employ Multiple Correspondence Analysis (MCA) as a dimension reduction technique, which is then subject to cluster analysis and interpretation. To quantify more accurate survival probabilities, Kaplan-Meier estimation is formulated to account for censoring in the data. The analysis identified the classic phenotype for this condition, as well as one other distinct feature cluster relating to findings of vocal cord paralysis and respiratory failure. The survival probability for those affected was found to decline sharply in early infancy with median survival of 150 days, but with some as high as 12.5 years. This wide range of outcomes is provisionally associated with variant type however interpretation of these results are guarded based on very low sample sizes. Despite challenges with sparse and inconsistent data, this analysis represents the first of its kind to help describe associations and trajectories of individuals with this condition and can provide clinicians and genetic counsellors with better information to aide in decision making and support for families.
+keywords: 
+  - NEDMABA
+  - SMPD4
+#journal: "An awesome journal"
+date: last-modified
 execute: 
   echo: false 
+bibliography: bibliography.bib
+format:
+  elsevier-pdf:
+    keep-tex: true
+    journal:
+      formatting: preprint
+      model: 3p
+      cite-style: authoryear
 ---
 
 ```{r echo=FALSE, message=FALSE}
@@ -22,9 +31,6 @@ source(here::here('R', 'utils.R'))
 theme_set(theme_bw())
 ```
 
-```{r}
-# table with med gen 
-```
 
 # Introduction
 
@@ -52,6 +58,7 @@ This research has three key aims. First, to collate and transform the variety of
 
 This will be the first in-depth analysis of this novel variant, which aims to produce statistical findings to better understand this newly described condition. This research will assist clinicians understand the various presentations of this challenging new condition. In addition, genetic counselling of families with affected children will benefit from enhanced analysis on outcomes of existing reported cases.
 
+
 # Methods
 
 ## SMPD4 Data Package
@@ -61,13 +68,13 @@ The data contained in @magini2019loss "Summary of SMPD4-Related Clinical Phenoty
 The data were read into `R` [@rbase] without any changes, so as to preserve the reproducibility of the data transformation steps. The data were transposed to ensure it could be presented as *tidy* formatted data [@JSSv059i10]. This requires each variable (clinical phenotype) forms a column; each observation (individual) forms a row and each type of observational unit forms a table (every cell has just one item). This resulted in a long-formatted data set of 21 rows (individuals) and 64 columns (clinical features). In many cases, key clinical information was entered as free-text descriptions, which rendered any attempt of meaningful analysis impractical (@tbl-nontidy). In these cases, the text was tokenised by separating the list of clinical observations at each comma and forming a binary indicator column noting its presence '1' or absence '0' (@tbl-tidy).
 
 |                     | Family 1- Individual 1                                                                                     | Family 1- Individual 4                                      |
-|------------------|-----------------------------------|-------------------|
+|---------------|-------------------------------------|--------------------|
 | Facial dysmorphisms | short palpebral fissures, large ears, simple helices, smooth philtrum, thin lips, bilateral simian creases | short palpebral fissures, receding forehead, thin upper lip |
 
 : Example of non-tidy free-text descriptions of features {#tbl-nontidy}
 
 | id                     | short palpebral fissures | large ears | simple helices | receding forehead | ... |
-|------------|------------|------------|------------|------------|------------|
+|------------|-------------|------------|------------|------------|------------|
 | Family 1- Individual 1 | 1                        | 1          | 1              | 0                 | ... |
 | Family 1- Individual 4 | 1                        | 0          | 0              | 1                 | ... |
 
@@ -432,6 +439,10 @@ In terms of patient survival, the first few months show a sharp decline in survi
 
 Despite NEDMABA exhibiting a diverse and heterogeneous clinical phenotype, our analysis was able to identify meaningful substructures in this data through the use of dimension reduction techniques (MCA) and cluster analysis. This has isolated the classic NEDMABA phenotype of microcephaly, hypomyelination, arthrogryposis, simplified gyral pattern and developmental delay. Furthermore it has isolated additional distinct groupings of features that are exhibited in patients such as vocal cord paralysis with tracheostomy, swallowing dysfunction, tube feeding and GERD. Furthermore, we were able to quantify the expected baseline survival probabilities for children with this condition as well as quantifying the significant variation in these estimates. Future work is required with the benefit of more cases, to better understand the differences in survival curves for other factors associated with genotype.
 
+\newpage
+
+# Appendix  
+
 ```{r}
 #| label: tbl-hpo
 #| tbl-cap: "A mapping table of phenotype terms from The Human Phenotype Ontology (HPO) with clusters defined in this analysis. Not all clinical features defined in the analysis are present in the HPO terms"
@@ -511,17 +522,6 @@ hpo |>
   )
 ```
 
-\newpage
-
-# Appendix
-
-```{r}
-#| label: tbl-dict
-#| tbl-cap: Data dictionary of the final data set used for the analysis. This combines the case reports and supplied data for available and references studies. The data has been transformed into a tidy format with formatting applied. 
-tar_load(subjects)
-make_data_dictionary(subjects)
-```
-
 ```{r}
 #| label: tbl-profile
 #| tbl-cap: Assignment of clinical features with their cluster. These clusters represent similar features projected onto the first four MCA principal axes. Clusters that are on opposing sides of an axes contract with each other and account for the largest amount of variation in the data. 
@@ -535,6 +535,13 @@ cbind(cluster_data, cluster = cluster_assignments) |>
   kable()
 ```
 
+```{r}
+#| label: tbl-dict
+#| tbl-cap: Data dictionary of the final data set used for the analysis. This combines the case reports and supplied data for available and references studies. The data has been transformed into a tidy format with formatting applied. 
+tar_load(subjects)
+make_data_dictionary(subjects)
+```
+
 \newpage
 
-# References
+# References {-}
