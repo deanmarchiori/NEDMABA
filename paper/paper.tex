@@ -139,7 +139,7 @@
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \urlstyle{same} % disable monospaced font for URLs
 \hypersetup{
-  pdftitle={Clinical Phenotype and Survival Analysis in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies Due to Bi-allelic Loss of Function Variants in SMPD4},
+  pdftitle={Clinical Phenotype and Survival Analysis of Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies Due to Bi-allelic Loss of Function Variants in SMPD4},
   pdfauthor={Dean Marchiori},
   pdfkeywords={NEDMABA, SMPD4},
   colorlinks=true,
@@ -153,7 +153,7 @@
 \begin{document}
 
 \begin{frontmatter}
-\title{Clinical Phenotype and Survival Analysis in Neurodevelopmental
+\title{Clinical Phenotype and Survival Analysis of Neurodevelopmental
 Disorder with Microcephaly, Arthrogryposis, and Structural Brain
 Anomalies Due to Bi-allelic Loss of Function Variants in \emph{SMPD4}}
 \author[]{Dean Marchiori%
@@ -175,30 +175,30 @@ so far exhibiting a severe and clinically diverse phenotype. A gap
 exists in the understanding of associations present in the heterogenous
 features of the clinical phenotype, and the expected survival
 probabilities of affected individuals. This is driven in part to the
-paucity of analysis-ready data on reported cases. This research aims to
+paucity of analysis-ready data on reported cases. This analysis aims to
 collate and standardise available case reports into a common dataset, to
 analyse and identify meaningful clusters in the clinical phenotype, and
 to quantify the survival probability for children with NEDMABA. To
 overcome the challenge of multidimensional data on very few subjects, we
 employ Multiple Correspondence Analysis (MCA) as a dimension reduction
 technique, which is then subject to cluster analysis and interpretation.
-To account for censoring in the data Kaplan-Meier estimation is
-formulated calculate patient survival time. The analysis correctly
-detected the classic phenotype for this condition, as well as an
-additional distinct feature-cluster relating to findings of vocal cord
-paralysis, feeding dysfunction and respiratory failure. Several
-additional outlying and isolated clinical features were also identified.
-The survival probability for those affected was found to decline sharply
-in early infancy with median survival of 150 days, but with some
-surviving as long as 12.5 years. This wide range of outcomes is
-provisionally associated with different variant types however this
-conclusion could not be validated based on very low sample sizes. This
-analysis represents the first of its kind to help describe associations
-and trajectories of individuals with this newly reported condition,
-despite challenges with sparse and inconsistent data. This analysis can
-provide clinicians and genetic counsellors with better information to
-aide in decision making and support for families with this rare
-condition.
+To account for censoring in the data, Kaplan-Meier estimation is
+formulated to calculate patient survival time. The analysis correctly
+detected the classic phenotype for this condition, as well as a new
+distinct feature-cluster relating to findings of vocal cord paralysis,
+feeding dysfunction and respiratory failure. The survival probability
+for those affected was found to decline sharply in early infancy with
+median survival of 150 days, but with some surviving as long as 12.5
+years. This wide range of outcomes is provisionally associated with
+different variant types however this conclusion could not be validated
+based on very low sample sizes. An \texttt{R} package called
+\texttt{SMPD4} was developed to publish standardised analysis-ready
+datasets used in this study. This analysis represents the first of its
+kind to help describe associations and trajectories of individuals with
+this newly reported condition, despite challenges with sparse and
+inconsistent data. This analysis can provide clinicians and genetic
+counsellors with better information to aide in decision making and
+support for families with this rare condition.
 \end{abstract}
 
 
@@ -209,7 +209,7 @@ condition.
     NEDMABA \sep 
     SMPD4
 \end{keyword}
-\end{frontmatter}\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, interior hidden, sharp corners, enhanced, boxrule=0pt, breakable, frame hidden]}{\end{tcolorbox}}\fi
+\end{frontmatter}\ifdefined\Shaded\renewenvironment{Shaded}{\begin{tcolorbox}[borderline west={3pt}{0pt}{shadecolor}, frame hidden, boxrule=0pt, enhanced, interior hidden, breakable, sharp corners]}{\end{tcolorbox}}\fi
 
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
@@ -232,16 +232,6 @@ neurological complications and early demise a key feature. This makes
 the identification, diagnosis and ongoing management of cases a
 challenge for patients, their families and medical practitioners.
 
-\citet{ravenscroft2021neurogenetic} performed a study over 190 probands
-and identified a novel missense variation in SMPD4 which at the time of
-whole exome sequencing was not well described in the literature. The
-impacted family from Melbourne exhibited features involving
-arthrogryposis multiplex congenita, complex brain malformations, small
-for gestation age and hypoplasia of the corpus callosum. In two of the
-three related cases were additional features of microcephaly, congenital
-encephalopathy, cerebellar malformation and hypoplasia and
-hypomyelination.
-
 A detailed study by \citet{magini2019loss} involved 12 unrelated
 families with 32 individuals (21 with detailed clinical information).
 Presentations were of microcephaly, simplified gyral pattern of the
@@ -257,10 +247,14 @@ simplified gyral patterns on brain MRI. Other patients with truncating
 variants are shown to have more severe presentations, while a range of
 additional significant clinical features were reported involving
 dysmorphic facial features, seizure, vocal cord paralysis and hearing
-impairment.
-
-A case study from China is described in \citet{ji2022case} involving a
-girl presenting in infancy with intrauterine growth restriction,
+impairment. \citet{ravenscroft2021neurogenetic} studied a family from
+Melbourne exhibiting features involving arthrogryposis multiplex
+congenita, complex brain malformations, small for gestation age and
+hypoplasia of the corpus callosum. In two of the three related cases
+were additional features of microcephaly, congenital encephalopathy,
+cerebellar malformation and hypoplasia and hypomyelination. A case study
+from China is described in \citet{ji2022case} involving a girl
+presenting in infancy with intrauterine growth restriction,
 microcephaly, postnatal developmental delay, arthrogryposis,
 hypertonicity, seizure, and hypomyelination on brain magnetic resonance
 imaging. The authors report parallels with two cases showing the same
@@ -268,10 +262,8 @@ homozygous null variant. An individual reported in
 \citet{monies2019lessons} presented with distinct symptoms of brain
 atrophy and skeletal dysplasia whereas the case in
 \citet{magini2019loss} with the same variant exhibited more typical
-clinical features.
-
-A recent study by \citet{bijarnia2022growth} presents the case of a
-22-month old girl presenting with the typical phenotype of
+clinical features. A recent study by \citet{bijarnia2022growth} presents
+the case of a 22-month old girl presenting with the typical phenotype of
 neurodevelopmental delay, prenatal onset growth failure, arthrogryposis,
 microcephaly and brain anomalies including severe hypomyelination,
 simplified gyral pattern and hypoplasia of corpus callosum and
@@ -280,33 +272,30 @@ findings of nystagmus and visual impairment secondary to macular
 dystrophy and retinal pigment epithelial stippling at posterior pole.
 
 Further work to collate and analyse data relating to NEDMABA is
-challenging. While \citet{magini2019loss} cataloged a detailed clinical
-phenotype data set as a supplementary data set to their study, these
-data are not suitable for statistical analysis as presented. Many of the
-clinical features are represented as free text descriptions and a
-variety of non-standard terminologies are applied between cases, making
-machine interpretation of the data difficult. Other studies
-\citep{ji2022case, bijarnia2022growth} present only written case reports
-with some tabulated summaries. While larger studies
-\citep{ravenscroft2021neurogenetic, monies2019lessons} focus more on
-genetic data, with less detail included on the clinical presentation of
-individuals in the cohort.
-
-To overcome these data challenges, \citet{JSSv059i10} proposes a data
-structure know as `tidy' data which organises each observation in a row,
-with each feature as its own column and each value in just one cell. In
-this case detailed text-based data can be transformed to high
-dimensional binary indicators of key clinical features. This structure
-is conducive to effective statistical analysis and integrates
-deliberately with the \emph{tidyverse} \citep{tidyverse} collection of
-packages for data analysis in R \citep{rbase}.
+challenging. While \citet{magini2019loss} included a supplementary
+clinical phenotype data set in their study, these data are not suitable
+for statistical analysis. Many of the clinical features are represented
+as text descriptions and a variety of non-standard terminologies are
+applied between cases, making machine interpretation of the data
+difficult. Other studies \citep{ji2022case, bijarnia2022growth} present
+only written case reports with some tabulated summaries. While larger
+studies \citep{ravenscroft2021neurogenetic, monies2019lessons} focus
+more on genetic data, with less detail included on the clinical
+presentation of individuals. To overcome these data challenges,
+\citet{JSSv059i10} proposes a data structure know as `tidy' data which
+organises each observation in a row, with each feature as its own column
+and each value in just one cell. In this case detailed text-based data
+can be transformed to high dimensional binary indicators of key clinical
+features. This structure is conducive to effective statistical analysis
+and integrates deliberately with the \emph{tidyverse} \citep{tidyverse}
+collection of packages for data analysis in R \citep{rbase}.
 
 Further analysis to better describe rare genetic conditions was explored
 in \citet{diaz2020phenotype} in the context of large scale
 genotype-phenotype analysis. The authors argue patients with rare
 disorders (often in small samples) frequently present with varied
 symptoms that do not match exactly with the described phenotype. When
-considering this situation of low sample size data with many features,
+considering the situation of low sample size data with many features,
 methods in the field of multivariate statistical analysis are commonly
 deployed. Here the aim is to find substructure in the data, or a simple
 representation of the multi-dimensional space. Methods, such as Multiple
@@ -326,15 +315,15 @@ end of the study period.
 An open research question exists around the clinical pathway and
 survival time of children exhibiting bi-allelic loss-of-function
 variants in \emph{SMPD4}. With current research highlighting a diverse
-and heterogeneous phenotype, the relationship and correlations between
-these diverse features is not well understood. Furthermore, the survival
-time of affected children has not been extensively analysed despite
-early-demise featuring as a severe outcome in many cases. While a
-connection has been highlighted between some missense variants and a
-milder presentation with longer survival \citep{magini2019loss}, this
-hypothesis has not been analysed further.
+and heterogeneous phenotype, the relationship between these diverse
+features is not well understood. Furthermore, the survival time of
+affected children has not been extensively analysed despite early-demise
+featuring as a severe outcome. While a connection has been highlighted
+between some missense variants and a milder presentation with longer
+survival \citep{magini2019loss}, this hypothesis has not been analysed
+further.
 
-This research has three key aims. First, to collate and transform the
+This analysis has three key aims. First, to collate and transform the
 variety of early case reports and studies on clinical phenotype data for
 this novel variant into an analysis-ready \emph{tidy} data set.
 Secondly, to conduct analysis on the associations between commonly
@@ -364,10 +353,10 @@ phenotype or clinical remark).
 The data were read into \texttt{R} \citep{rbase} without any changes, so
 as to preserve the reproducibility of the data transformation steps. The
 data were transposed to ensure it could be presented as \emph{tidy}
-formatted data \citep{JSSv059i10}. This requires each variable (clinical
-phenotype) forms a column; each observation (individual) forms a row and
-each type of observational unit forms a table (every cell has just one
-item). This resulted in a long-formatted data set of 21 rows
+formatted data \citep{JSSv059i10}. This requires that each variable
+(clinical phenotype) forms a column; each observation (individual) forms
+a row and each type of observational unit forms a table (every cell has
+just one item). This resulted in a long-formatted data set of 21 rows
 (individuals) and 64 columns (clinical features). In many cases, key
 clinical information was entered as free-text descriptions, which
 rendered any attempt of meaningful analysis impractical
@@ -517,17 +506,17 @@ described above and other fields including background information on the
 patient and various bio markers. A full list of this data set is
 available in Table~\ref{tbl-dict}. These data sets were compiled into a
 publicly available \texttt{R} Package called \texttt{SMPD4}
-\citep{smpd4-data} in order to allow for reproducibility and sharing.
+\citep{smpd4-data} to allow for reproducibility and sharing.
 
 \hypertarget{multiple-correspondence-analysis}{%
 \subsection{Multiple Correspondence
 Analysis}\label{multiple-correspondence-analysis}}
 
-The data on subjects introduced above is subset to include only
-variables that can be transformed into binary indicator variables that
-represent the presence or absence of a given clinical feature. Only
-those features that appeared in more than one case report were included
-to minimise the influence of isolated features in this analysis.
+The data on subjects above is subset to include only variables that can
+be transformed into binary indicator variables representing the presence
+or absence of a given clinical feature. Only those features that
+appeared in more than one case report were included to minimise the
+influence of isolated features.
 
 Dimension reduction on this wide data set was performed using Multiple
 Correspondence Analysis (MCA) (an analogy to Principle Component
@@ -768,9 +757,10 @@ in grey around the origin.}
 Cluster validation measures resulted in either 2 or 5 clusters as the
 optimal choice (Table~\ref{tbl-opticlust}). In order to partition the
 data into meaningful groupings, k-means with 5 clusters was selected.
-This reflects the optimal choice for both AD and FOM cluster metrics. A
-scatter plot of the cluster results shown in Figure~\ref{fig-clust} is
-projected on the first two principal dimensions highlights a core
+This reflects the optimal choice for both AD and FOM cluster metrics.
+The results are summarised in Table~\ref{tbl-clusttab} and a scatter
+plot of the cluster results is shown in Figure~\ref{fig-clust} is
+projected on the first two principal dimensions. This highlights a core
 cluster of classic features of NEDMABA such as microcephaly,
 hypomyelination, arthrogryposis and feet deformity and structural brain
 anomalies. A separate and adjacent cluster is formed of airway and
@@ -782,7 +772,8 @@ assignment is given in Table~\ref{tbl-profile}.
 
 \hypertarget{tbl-opticlust}{}
 \begin{longtable}{lrlr}
-\caption{\label{tbl-opticlust}Optimal clusters }\tabularnewline
+\caption{\label{tbl-opticlust}Optimal cluster numbers and methods based on a range of stability
+validation metrics. }\tabularnewline
 
 \toprule
 Metric & Score & Method & Clusters \\ 
@@ -807,6 +798,27 @@ many of these comparable metrics.}
 
 \end{figure}
 
+\hypertarget{tbl-clusttab}{}
+\setlength{\LTpost}{0mm}
+\begin{longtable}{rrl}
+\caption{\label{tbl-clusttab}A summary table to cluster membership showing the cluster number and
+number of features in each cluster and a sample of features that have
+membership in each. }\tabularnewline
+
+\toprule
+Cluster No. & No. Features & Sample Features in Cluster\textsuperscript{1} \\ 
+\midrule
+1 & 7 & polyhydramnios, short palpebral fissures, patent ductus arteriosus, thin lips \\ 
+2 & 11 & vocal cord palsy, respiratory distress, tracheostomy, posteriorly angulated ears \\ 
+3 & 7 & epicanthal folds, receding forehead, spastic tetraparesis, intubation \\ 
+4 & 21 & microcephaly, sgp, iugr, talipes \\ 
+5 & 6 & hypercapnia, inspiratory stridor, oligohydramnios, prominent ears \\ 
+\bottomrule
+\end{longtable}
+\begin{minipage}{\linewidth}
+\textsuperscript{1}A sample of 4 features shown to illustrate cluster membership\\
+\end{minipage}
+
 \begin{figure}
 
 {\centering \includegraphics{paper_files/figure-pdf/fig-clust-1.pdf}
@@ -826,7 +838,7 @@ provide a representation of each cluster's characteristics.}
 The Kaplan-Meier estimator shows a range of survival times (0, 4562
 days) with median survival time calculated as 150 days. At time 0 the
 survival probability was 0.82 (95\% CI: 0.69, 0.98). Survival
-probability after one year at 0.403 (95\% CI: 0.252, 0.644) and survival
+probability after one year of 0.403 (95\% CI: 0.252, 0.644) and survival
 probability at close to ten years of 0.24 (95\% CI: 0.11, 0.52).
 
 \begin{longtable}[]{@{}rrrrrrrr@{}}
@@ -883,7 +895,18 @@ missense variants the survival time varies greatly. Other missense
 variants, such as heterozygous missense with gene deletion do not show
 the same increased survival time as noted by \citet{magini2019loss}.
 
-\includegraphics{paper_files/figure-pdf/unnamed-chunk-14-1.pdf}
+\begin{figure}
+
+{\centering \includegraphics{paper_files/figure-pdf/fig-box-1.pdf}
+
+}
+
+\caption{\label{fig-box}A compariative box plot showing the range of
+survival times for subjects split by the type of variant. Green bars
+indicate homozygous variants, while red indicates compound heterozygous
+variants.}
+
+\end{figure}
 
 A log-rank test was carried out to compare the survival curves of
 patients stratified by the various gene variants and showed a
@@ -895,76 +918,57 @@ large number of possible variants, several had expected counts less than
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
-Often, data collected in studies is fit for descriptive purposes but not
-for in-depth statistical analysis. This meta-review of current studies
-was able to consolidate and make publicly available, data sets that
-allow analysis to be conducted on emerging conditions such as NEDMABA.
-
-The use of dimension reduction techniques were shown to be successful in
+This meta-review of current research was able to consolidate data that
+allowed statistical analysis to be conducted on affected individuals.
+The use of dimension reduction techniques was shown to be successful in
 uncovering relevant and novel substructure in the data. This was
 particularly evident with the detection of the accepted typical
 phenotype of microcephaly, hypomyelination, arthrogryposis, simplified
-gyral pattern and developmental delay.
-
-After excluding two outlying remarkable cases, this analysis clearly
-identifies the presence of an adjacent cluster of related features that
-are not as well described in The Human Phenotype Ontology
-\citep{kohler2021human} as shown in Table~\ref{tbl-hpo}. We identify the
-prolific feature of `respiratory distress' as an expression more
-commonly associated with \emph{other} features such as vocal cord palsy,
+gyral pattern and developmental delay. After excluding two outlying
+remarkable cases, we identified the presence of an adjacent cluster of
+related features that are not well described in The Human Phenotype
+Ontology \citep{kohler2021human} as shown in Table~\ref{tbl-hpo}. It
+shows the prolific feature of `respiratory distress' as more commonly
+associated with these adjacent features such as vocal cord palsy,
 tracheostomy, tube feeding and Gastroesophageal reflux disease (GERD).
 These features are present in the case reported data, but not well
 described in HPO and help account for the variation seen in the clinical
 phenotype in the first few principal dimensions.
 
-Other smaller clusters identify outlying features that are expressed in
-individuals or specific families. Many of the outlying features are
+The heterogeneous variation in the data was clearly evident with the
+first four principal axes being required to explain more than 50\% of
+the variation in the data set. Visual inspection shows the primary
+sources of variation in the clinical phenotype are explained by a few
+individuals with very different clinical features. Many of these exhibit
 highly specific facial or anatomical dysmorphisms. While coarse facial
-features are a noted and core presentation, those with a milder course
-had clinical reports that articulated these dysmorphisms in much more
-detail, which skewed the interpretation.
-
-On a similar note, talipes appears as an isolated feature without the
-typical microcephaly and hypomyelination. However, there was significant
+features are a core presentation, those with a milder course had
+clinical reports that articulated these dysmorphisms in much more
+detail. Additionally, talipes appears as an isolated feature without the
+typical microcephaly and hypomyelination, however there was significant
 heterogeneity in how feet contractures were reported in clinical case
-reports. While distinctions were made during data pre-processing between
-rocker-bottom feed and talipes, this likely to make intpretation
-somewhat difficult. This is particularly clear as rocker-bottom feet was
-found closely related in our analysis to other core features despite the
+reports. This is particularly evident in rocker-bottom feet which was
+found closely related in our analysis to core features despite the
 prevalence in HPO being quite low (2/21), suggesting possible
-under-reporting or confounded reporting of this feature.
+under-reporting or confounded reporting of this feature. Another core
+identified feature is bilateral cleft lip. This condition has a reported
+frequency of just 2/21 (Table~\ref{tbl-hpo}) and may be an emerging
+feature for a more typical presentation given its close relationship
+with other classic features. Features isolated to just one or few cases
+in our consolidated data have been labelled as `Isolated' in
+Table~\ref{tbl-hpo}. An optimal choice of both 2 and 5 clusters were
+recommended in the analysis. A partition of the data with just two
+clusters would likely be useful in separating outliers from other data.
+In this analysis a larger number (5) was selected to align the goals of
+the analysis which was to uncover distinct groups of features.
 
-Another feature clusted within core identified features is bilateral
-cleft lip. This condition has a reported frequency of just 2/21
-(Table~\ref{tbl-hpo}) and may be an emerging feature for a more typical
-presentation given its close relationship with other classic features.
-
-The heterogeneous variation in the data was clearly evident however,
-with the first four principal axes being required to explain more than
-50\% of the variation in the data set. Visual inspection of the data
-projected into this lower dimensional space indicate the primary sources
-of variation in the clinical phenotype are explained by a few
-individuals with very different clinical features. This has confounded
-the typical or classical presentation. Not all features in the data were
-included in this analysis, particular if isolated to just one case. In
-this circumstance, these terms in Table~\ref{tbl-hpo} have been labelled
-as `Isolated'.
-
-While the number of clusters chosen all represent valid partition of the
-data, some metrics indicated an optimal selection of 2 clusters. This
-type of partition is useful when segregating outliers from the rest of
-the data and is valid in some applications. In this study, a larger
-number (5) was selected to align the goals of the analysis which was to
-uncover distinct groups of features.
-
-In terms of patient survival, the first few months show a sharp decline
-in survival probability confirming early demise in the infant period as
-a key factor. A small number of cases show much longer survival into
+In terms of patient survival, the first few months of life show a sharp
+decline in survival probability confirming early demise in the infant
+period as a key factor. A small number of cases show survival into
 childhood and in some cases into the second decade of life. This work
 identifies a one year survival rate of 0.403 (95\% CI: 0.252, 0.644). On
 the other hand, a naive estimate using just the number of deceased
-patients at this time as proportion of the study population is 0.57
-(16/28). This highlights the importance of applying a survival analysis
+patients at this time as proportion of the study population is 0.43 (1 -
+16/28). This highlights the importance of applying a survival analysis
 technique that incorporates censoring so as not to erroneously
 overestimate the survival probability. The current literature suggests
 the type of gene variant has an impact on survival time, which seems to
