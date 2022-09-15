@@ -1,27 +1,14 @@
 ---
-title: Clinical Phenotype and Survival Analysis of Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies Due to Bi-allelic Loss of Function Variants in *SMPD4*
-author:
-  - name: Dean Marchiori
-    email: deanmarchiori@gmail.com
-    attributes:
-        corresponding: true
-abstract: |
-  A recently described, rare genetic condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) has been identified in children with bi-allelic loss-of-function variants in *SMPD4*. The progression of this condition is not well understood with the limited case reports described so far exhibiting a severe and clinically diverse phenotype. A gap exists in the understanding of associations present in the heterogenous features of the clinical phenotype, and the expected survival probabilities of affected individuals. This is driven in part to the paucity of analysis-ready data on reported cases. This analysis aims to collate and standardise available case reports into a common dataset, to analyse and identify meaningful clusters in the clinical phenotype, and to quantify the survival probability for children with NEDMABA. To overcome the challenge of multidimensional data on very few subjects, we employ Multiple Correspondence Analysis (MCA) as a dimension reduction technique, which is then subject to cluster analysis and interpretation. To account for censoring in the data, Kaplan-Meier estimation is formulated to calculate patient survival time. The analysis correctly detected the classic phenotype for this condition, as well as a new distinct feature-cluster relating to findings of vocal cord paralysis, feeding dysfunction and respiratory failure. The survival probability for those affected was found to decline sharply in early infancy with median survival of 150 days, but with some surviving as long as 12.5 years. This wide range of outcomes is provisionally associated with different variant types however this conclusion could not be validated based on very low sample sizes. An `R` package called `SMPD4` was developed to publish standardised analysis-ready datasets used in this study. This analysis represents the first of its kind to help describe associations and trajectories of individuals with this newly reported condition, despite challenges with sparse and inconsistent data. This analysis can provide clinicians and genetic counsellors with better information to aide in decision making and support for families with this rare condition.
-keywords: 
-  - NEDMABA
-  - SMPD4  
-#journal: "Preprint"    
+title: "Meta-Analysis of Clinical Phenotype and Patient Survival in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies Due to Bi-allelic Loss of Function Variants in SMPD"
+author: Dean Marchiori
+format:
+  pdf:
+    keep-tex: true
+editor: visual
+bibliography: bibliography.bib
 date: last-modified
 execute: 
   echo: false 
-bibliography: bibliography.bib
-format:
-  elsevier-pdf:
-    keep-tex: true
-    journal:
-      formatting: preprint
-      model: 3p
-      cite-style: authoryear
 ---
 
 ```{r echo=FALSE, message=FALSE}
@@ -31,6 +18,9 @@ source(here::here('R', 'utils.R'))
 theme_set(theme_bw())
 ```
 
+# Abstract
+
+A recently described, rare genetic condition known as Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies (NEDMABA) has been identified in children with bi-allelic loss-of-function variants in *SMPD4*. The progression of this condition is not well understood with the limited case reports described so far exhibiting a severe and clinically diverse phenotype. A gap exists in the understanding of associations present in the heterogenous features of the clinical phenotype, and the expected survival probabilities of affected individuals. This is driven in part to the paucity of analysis-ready data on reported cases. This analysis aims to collate and standardise available case reports into a common dataset, to analyse and identify meaningful clusters in the clinical phenotype, and to quantify the survival probability for children with NEDMABA. To overcome the challenge of multidimensional data on very few subjects, we employ Multiple Correspondence Analysis (MCA) as a dimension reduction technique, which is then subject to cluster analysis and interpretation. To account for censoring in the data, Kaplan-Meier estimation is formulated to calculate patient survival time. The analysis correctly detected the classic phenotype for this condition, as well as a new distinct feature-cluster relating to findings of vocal cord paralysis, feeding dysfunction and respiratory failure. The survival probability for those affected was found to decline sharply in early infancy with median survival of 150 days, but with some surviving as long as 12.5 years. This wide range of outcomes is provisionally associated with different variant types however this conclusion could not be validated based on very low sample sizes. An `R` package called `SMPD4` was developed to publish standardised analysis-ready datasets used in this study. This analysis represents the first of its kind to help describe associations and trajectories of individuals with this newly reported condition, despite challenges with sparse and inconsistent data. This analysis can provide clinicians and genetic counsellors with better information to aide in decision making and support for families with this rare condition.
 
 # Introduction
 
@@ -40,16 +30,15 @@ A detailed study by @magini2019loss involved 12 unrelated families with 32 indiv
 
 Further work to collate and analyse data relating to NEDMABA is challenging. While @magini2019loss included a supplementary clinical phenotype data set in their study, these data are not suitable for statistical analysis. Many of the clinical features are represented as text descriptions and a variety of non-standard terminologies are applied between cases, making machine interpretation of the data difficult. Other studies [@ji2022case; @bijarnia2022growth] present only written case reports with some tabulated summaries. While larger studies [@ravenscroft2021neurogenetic; @monies2019lessons] focus more on genetic data, with less detail included on the clinical presentation of individuals. To overcome these data challenges, @JSSv059i10 proposes a data structure know as 'tidy' data which organises each observation in a row, with each feature as its own column and each value in just one cell. In this case detailed text-based data can be transformed to high dimensional binary indicators of key clinical features. This structure is conducive to effective statistical analysis and integrates deliberately with the *tidyverse* [@tidyverse] collection of packages for data analysis in R [@rbase].
 
-Further analysis to better describe rare genetic conditions was explored in @diaz2020phenotype in the context of large scale genotype-phenotype analysis. The authors argue patients with rare disorders (often in small samples) frequently present with varied symptoms that do not match exactly with the described phenotype. When considering the situation of low sample size data with many features, methods in the field of multivariate statistical analysis are commonly deployed. Here the aim is to find substructure in the data, or a simple representation of the multi-dimensional space. Methods, such as Multiple Correspondence Analysis [@le2010multiple] are appropriate for high dimensional data comprised of binary indicators. This technique is cited in many studies in the application of dimension reduction and clustering of comorbidities and phenotypes from disease [@han2018cluster; @costa2013use].  
+Further analysis to better describe rare genetic conditions was explored in @diaz2020phenotype in the context of large scale genotype-phenotype analysis. The authors argue patients with rare disorders (often in small samples) frequently present with varied symptoms that do not match exactly with the described phenotype. When considering the situation of low sample size data with many features, methods in the field of multivariate statistical analysis are commonly deployed. Here the aim is to find substructure in the data, or a simple representation of the multi-dimensional space. Methods, such as Multiple Correspondence Analysis [@le2010multiple] are appropriate for high dimensional data comprised of binary indicators. This technique is cited in many studies in the application of dimension reduction and clustering of comorbidities and phenotypes from disease [@han2018cluster; @costa2013use].
 
 In terms of patient survival, methods in statistical survival analysis are well suited and commonly used in the field of genomics [@chen2014survival]. These methods in particular provide a mechanism for dealing with right-censoring, a common feature of clinical studies where the clinical outcome of interest may not be known by the end of the study period.
 
-An open research question exists around the clinical pathway and survival time of children exhibiting bi-allelic loss-of-function variants in *SMPD4*. With current research highlighting a diverse and heterogeneous phenotype, the relationship between these diverse features is not well understood. Furthermore, the survival time of affected children has not been extensively analysed despite early-demise featuring as a severe outcome. While a connection has been highlighted between some missense variants and a milder presentation with longer survival [@magini2019loss], this hypothesis has not been analysed further. 
+An open research question exists around the clinical pathway and survival time of children exhibiting bi-allelic loss-of-function variants in *SMPD4*. With current research highlighting a diverse and heterogeneous phenotype, the relationship between these diverse features is not well understood. Furthermore, the survival time of affected children has not been extensively analysed despite early-demise featuring as a severe outcome. While a connection has been highlighted between some missense variants and a milder presentation with longer survival [@magini2019loss], this hypothesis has not been analysed further.
 
 This analysis has three key aims. First, to collate and transform the variety of early case reports and studies on clinical phenotype data for this novel variant into an analysis-ready *tidy* data set. Secondly, to conduct analysis on the associations between commonly reported clinical features. Finally, to statistically quantify the expected survival time of children with NEDMABA based on the current case reports.
 
 This will be the first in-depth analysis of this novel variant, which aims to produce statistical findings to better understand this newly described condition. This research will assist clinicians understand the various presentations of this challenging new condition. In addition, genetic counselling of families with affected children will benefit from enhanced analysis on outcomes of existing reported cases.
-
 
 # Methods
 
@@ -59,18 +48,26 @@ The data contained in @magini2019loss "Summary of SMPD4-Related Clinical Phenoty
 
 The data were read into `R` [@rbase] without any changes, so as to preserve the reproducibility of the data transformation steps. The data were transposed to ensure it could be presented as *tidy* formatted data [@JSSv059i10]. This requires that each variable (clinical phenotype) forms a column; each observation (individual) forms a row and each type of observational unit forms a table (every cell has just one item). This resulted in a long-formatted data set of 21 rows (individuals) and 64 columns (clinical features). In many cases, key clinical information was entered as free-text descriptions, which rendered any attempt of meaningful analysis impractical (@tbl-nontidy). In these cases, the text was tokenised by separating the list of clinical observations at each comma and forming a binary indicator column noting its presence '1' or absence '0' (@tbl-tidy).
 
-|                     | Family 1- Individual 1                                                                                     | Family 1- Individual 4                                      |
-|---------------|-------------------------------------|--------------------|
-| Facial dysmorphisms | short palpebral fissures, large ears, simple helices, smooth philtrum, thin lips, bilateral simian creases | short palpebral fissures, receding forehead, thin upper lip |
+```{r}
+#| label: tbl-nontidy
+#| tbl-cap: Example of non-tidy free-text descriptions of features.
+tibble(
+  `Family 1- Individual 1` = c("short palpebral fissures, large ears, simple helices"),
+  `Family 1- Individual 4 ` = c("short palpebral fissures, receding forehead")
+  ) |> 
+  gt()
+```
 
-: Example of non-tidy free-text descriptions of features {#tbl-nontidy}
-
-| id                     | short palpebral fissures | large ears | simple helices | receding forehead | ... |
-|------------|-------------|------------|------------|------------|------------|
-| Family 1- Individual 1 | 1                        | 1          | 1              | 0                 | ... |
-| Family 1- Individual 4 | 1                        | 0          | 0              | 1                 | ... |
-
-: Example of tidy formatted data where individuals are transposed into rows and text into binary indicators {#tbl-tidy}
+```{r}
+#| label: tbl-tidy
+#| tbl-cap: Example of tidy formatted data where individuals are transposed into rows and text into binary indicators
+tribble(
+  ~"id", ~"short palpebral fissures", ~"large ears", ~"simple helices", ~"receding forehead", 
+  "Family 1- Individual 1", 1, 1, 1, 0,
+  "Family 1- Individual 4", 1, 0, 0, 1, 
+  ) |> 
+  gt()
+```
 
 In the case where synonymous terms are present, these indicator columns are consolidated and merged into one indicator column to prevent duplication e.g. {bilateral_cleft_lips, bilateral_cleft_lip, cleft_lip_b\_l} -\> {bilateral_cleft_lip}.
 
@@ -100,7 +97,7 @@ The final data set consisted of 28 observations (one per individual) and 152 var
 
 ## Multiple Correspondence Analysis
 
-The data on subjects above is subset to include only variables that can be transformed into binary indicator variables representing the presence or absence of a given clinical feature. Only those features that appeared in more than one case report were included to minimise the influence of isolated features.  
+The data on subjects above is subset to include only variables that can be transformed into binary indicator variables representing the presence or absence of a given clinical feature. Only those features that appeared in more than one case report were included to minimise the influence of isolated features.
 
 Dimension reduction on this wide data set was performed using Multiple Correspondence Analysis (MCA) (an analogy to Principle Component Analysis (PCA) for categorical data) [@le2010multiple] in order to arrive at a set of meaningfully small dimensions that account for most of the variation in the data. This computation was carried out using the *FactoMineR* R package [@factominer].
 
@@ -121,15 +118,13 @@ $$
 \end{split}
 $$
 
-
-
 The *contribution* of each category was computed for each of the principal axis per @le2010multiple. This metric identifies the proportion of variance of that axis due to the point and is defined as:
 
 $$
 Ctr_k = \frac{py_k^2}{\lambda}
 $$ Where $p$ represents the point weighting, $y$ is the coordinate relative to the principal axes of variance $\lambda$.
 
-The coordinates on the first few principal axes were inspected for any outliers or unusual data before being graphically interpreted and subject to further analysis.  
+The coordinates on the first few principal axes were inspected for any outliers or unusual data before being graphically interpreted and subject to further analysis.
 
 ## Cluster Analysis
 
@@ -139,7 +134,7 @@ A range of clustering algorithms were compared including AGNES hierarchical aggl
 
 ## Survival Analysis
 
-To model survival probability for all subjects in the combined data, the data were subsetted to include *survival_time* which is either the number of days the individual survived for, or the age in days at last follow up, and *deceased* a numeric event indicator which is equal to 1 if the subject is deceased and 0 if the subject was still alive at the time the respective study had concluded. The Kaplan-Meier estimator [@kaplan1958nonparametric] was used to estimate the survival function of the data.
+To model survival probability for all subjects in the combined data, the data were subsetted to include `survival_time` which is either the number of days the individual survived for, or the age in days at last follow up, and `deceased` a numeric event indicator which is equal to 1 if the subject is deceased and 0 if the subject was still alive at the time the respective study had concluded. The Kaplan-Meier estimator [@kaplan1958nonparametric] was used to estimate the survival function of the data.
 
 The estimator is calculated as:
 
@@ -147,7 +142,7 @@ $$
 \hat{S}(t) = \prod_{t_i \leq t}\frac{n_i - d_i}{n_i} 
 $$ where $t_i$ is some event time, $d_i$ represents the number of events (here deceased subjects) and $n_i$ indicating the individuals known to have survived up to $t_i$
 
-The baseline estimator of all individuals was calculated using the *survival* package in `R` [@survival-book]. Next the Kaplan-Meier estimator was stratified by the type of genetic variation reported in the literature. A log-rank test was performed to detect differences in the survival curves using methods from @harrington1982class, again implemented in the *survival* `R` package.
+The baseline estimator of all individuals was calculated using the `survival` package in `R` [@survival-book]. Next the Kaplan-Meier estimator was stratified by the type of genetic variation reported in the literature. A log-rank test was performed to detect differences in the survival curves using methods from @harrington1982class, again implemented in the `survival` `R` package.
 
 # Results
 
@@ -161,7 +156,7 @@ Repeating MCA for the remaining subjects shows the first dimension ($\lambda_1 =
 tar_load(mca_prelim) 
 ```
 
-```{r fig.height=5, fig.width=5,  warning=FALSE}
+```{r  warning=FALSE}
 #| label: fig-biplotprelim
 #| fig-cap: "A bi-plot of the first two principal axes with grey circles indicating the individual's projected position and black triangles indicating the variables. A 95% confidence ellipse is plotted in red around the origin."
 fviz_mca_biplot(
@@ -204,32 +199,32 @@ mca$eig |>
 
 The *contribution* of the categories were ranked within each of the first four principal dimensions in @fig-ctr. The first dimension is dominated by isolated cases with highly specific facial dysmorphisms such as epicanthal folds, short philtrum and low anterior hairline. The second MCA dimension is categorised by feeding and respiratory dysfunction with vocal cord palsy, tracheostomy, tube feeding and GERD. Examining the bi-plot of the first two principal axes (@fig-biplot) illustrates the contrasting sources of variation between conditions relating to airway and swallowing function and predominantly facial features and structural brain anomalies such as as cerebellar hypoplasia, development delay. The third dimension is characterised by atypical, complex features such as patent ductus arteriosus, respiratory infections, small for gestational age and further facial features. These are contrasted by the fourth principal dimension which is strongly categorised by respiratory distress including stridor and hypercapnia in the absence of typical presentations of simplified gyral pattern, intrauterine growth retardation and microcephaly.
 
-```{r ctr-plot, fig.height=6, fig.width = 8, warning=FALSE}
+```{r ctr-plot, warning=FALSE}
 #| label: fig-ctr
-#| fig-cap: "Top 10 feature categories from MCA analysis for the first four MCA dimensions. The red dashed line indicates the mean contribution value. Each feature may be present or absent as indicated by 1 or 0 respectively"
+#| fig-cap: "Top 5 feature categories as measured by feature contribution from MCA analysis for the first four MCA dimensions. The red dashed line indicates the mean contribution value."
 mca$var$contrib |> 
   as_tibble(rownames = 'vars') |> 
   select(1:5) |> 
   pivot_longer(cols = -vars, names_to = "dim", values_to = "contribution") |> 
   mutate(col = ifelse(str_detect(vars, "_0"), "absent", "present")) |> 
   group_by(dim) |> 
-  top_n(10, wt = contribution) |> 
+  slice_max(n = 5, order_by = contribution, with_ties = F) |> 
   mutate(vars = fct_reorder(vars, contribution)) |> 
   mutate(vars = str_remove(vars, "_[:digit:]")) |> 
   mutate(vars = str_remove(vars, "_ind")) |> 
   mutate(vars = str_replace_all(vars, "_", " ")) |> 
-  ggplot(aes(contribution, reorder_within(vars, by = contribution, within = dim), fill = col)) +
+  mutate(vars = str_wrap(vars, width = 25)) |> 
+  ggplot(aes(contribution, reorder_within(vars, by = contribution, within = dim))) +
   geom_col() +
   scale_y_reordered() +
   scale_fill_grey(start = 0.8, end = 0.2) +
   facet_wrap(~dim, scales = "free", ncol = 2) +
   geom_vline(xintercept = 100/122, lty = 2, col = 'red') +
-  guides(fill=guide_legend(title="Condition")) +
-  theme(legend.position = 'bottom') +
-  labs(y = '')
+  theme(legend.position = 'bottom', axis.text = element_text(size = 8)) +
+  labs(y = '', x = '')
 ```
 
-```{r fig.height=5, fig.width=5,  warning=FALSE}
+```{r , warning=FALSE}
 #| label: fig-biplot
 #| fig-cap: "A bi-plot of the first two principal axes with grey circles indicating the individual's projected position and black triangles indicating the variables. A 95% confidence ellipse is plotted in grey around the origin."
 fviz_mca_biplot(
@@ -254,7 +249,7 @@ fviz_mca_biplot(
 )
 ```
 
-```{r fig.height=5, fig.width=5,  warning=FALSE}
+```{r ,  warning=FALSE}
 #| label: fig-biplot2
 #| fig-cap: "A bi-plot of principal axes 3 and 4, with grey circles indicating the individual's projected position and black triangles indicating the variables. A 95% confidence ellipse is plotted in grey around the origin."
 fviz_mca_biplot(
@@ -339,8 +334,7 @@ cluster_assignments |>
   gt::tab_footnote(footnote = "A sample of 4 features shown to illustrate cluster membership", locations = cells_column_labels("Sample Features in Cluster")) 
 ```
 
-
-```{r, fig.height=6, fig.width=6,  warning=FALSE}
+```{r,warning=FALSE}
 #| label: fig-clust
 #| fig-cap: "A projection of features on the first two principal components with k-means cluster assignment indicated by colour. A random sample of three labels per cluster are printed to provide a representation of each cluster's characteristics."
 
@@ -364,12 +358,13 @@ hull <- d %>%
   geom_polygon(data = hull, alpha = 0.2, aes(fill = clust)) +
   geom_vline(xintercept = 0, lty = 2, colour = "grey50") +
   geom_hline(yintercept = 0, lty = 2, colour = "grey50") +
-  geom_label_repel(data = d |> group_by(clust) |> slice_sample(n=3), aes(label = var), size = 3, show.legend = F) +
+  geom_label_repel(data = d |> group_by(clust) |> slice_sample(n=3), aes(label = var), size = 2, show.legend = F) +
   geom_point(aes(colour = clust), position = "jitter", show.legend = F) +
   labs(x = "Dimension 1",
        y = "Dimension 2",
        fill = 'cluster') +
-    guides(color='none')
+    guides(color='none') +
+    theme(legend.position = 'none')
 ```
 
 ## Survival Analysis
@@ -379,15 +374,11 @@ hull <- d %>%
 tar_load(survival_data)
 tar_load(kapm_baseline)
 tar_load(kapm)
-```
 
-The Kaplan-Meier estimator shows a range of survival times (0, 4562 days) with median survival time calculated as 150 days. At time 0 the survival probability was 0.82 (95% CI: 0.69, 0.98). Survival probability after one year of 0.403 (95% CI: 0.252, 0.644) and survival probability at close to ten years of 0.24 (95% CI: 0.11, 0.52).
-
-```{r}
-# KM Curve
 x <- survminer::surv_summary(kapm_baseline, data = survival_data)
-kable(x, digits = 2, caption = "Survival probabilities derived from Kaplan-Meier estimation for the range of recorded survival times, including 95% Confidence Interval.")
 ```
+
+The Kaplan-Meier estimator shows a range of survival times (0, 4562 days) with median survival time calculated as 150 days. At time 0 the survival probability was 0.82 (95% CI: 0.69, 0.98). Survival probability after one year of 0.403 (95% CI: 0.252, 0.644) and survival probability at close to ten years of 0.24 (95% CI: 0.11, 0.52) See @tbl-km.
 
 ```{r, warning=FALSE}
 #| label: fig-surv
@@ -406,9 +397,9 @@ survminer::ggsurvplot_df(x,
 
 ```
 
-A comparative box plot of survival times by variant type shows significant outliers for compound heterozygous *missense + splice* and homozygous *missense* variants. However, even within homozygous missense variants the survival time varies greatly. Other missense variants, such as heterozygous missense with gene deletion do not show the same increased survival time as noted by @magini2019loss.
+A comparative box plot of survival times (@fig-box) by variant type shows significant outliers for compound heterozygous *missense + splice* and homozygous *missense* variants. However, even within homozygous missense variants the survival time varies greatly. Other missense variants, such as heterozygous missense with gene deletion do not show the same increased survival time as noted by @magini2019loss.
 
-```{r,fig.width=7, warning=FALSE}
+```{r, warning=FALSE}
 #| label: fig-box
 #| fig-cap: "A compariative box plot showing the range of survival times for subjects split by the type of variant. Green bars indicate homozygous variants, while red indicates compound heterozygous variants."
 
@@ -416,6 +407,7 @@ A comparative box plot of survival times by variant type shows significant outli
 ggplot(survival_data, aes(survival_time, variant,fill = variant_type.x)) +
   geom_boxplot() +
   theme(legend.position = 'bottom') +
+  scale_fill_grey(start = 0.4, end = 0.9) +
   labs(fill = 'Variant Type',
        x = 'Survival Time',
        y = '')
@@ -430,17 +422,17 @@ tar_load(logrank)
 
 # Discussion
 
-This meta-review of current research was able to consolidate data that allowed statistical analysis to be conducted on affected individuals. The use of dimension reduction techniques was shown to be successful in uncovering relevant and novel substructure in the data. This was particularly evident with the detection of the accepted typical phenotype of microcephaly, hypomyelination, arthrogryposis, simplified gyral pattern and developmental delay. After excluding two outlying remarkable cases, we identified the presence of an adjacent cluster of related features that are not well described in The Human Phenotype Ontology [@kohler2021human] as shown in @tbl-hpo. It shows the prolific feature of 'respiratory distress' as more commonly associated with these adjacent features such as vocal cord palsy, tracheostomy, tube feeding and Gastroesophageal reflux disease (GERD). These features are present in the case reported data, but not well described in HPO and help account for the variation seen in the clinical phenotype in the first few principal dimensions. 
+This meta-analysis of current research was able to consolidate data that allowed statistical analysis to be conducted on affected individuals. The use of dimension reduction techniques was shown to be successful in uncovering relevant and novel substructure in the data. This was particularly evident with the detection of the accepted typical phenotype of microcephaly, hypomyelination, arthrogryposis, simplified gyral pattern and developmental delay. After excluding two outlying remarkable cases, we identified the presence of an adjacent cluster of related features that are not well described in The Human Phenotype Ontology [@kohler2021human] as shown in @tbl-hpo. It shows the prolific feature of 'respiratory distress' as more commonly associated with these adjacent features such as vocal cord palsy, tracheostomy, tube feeding and Gastroesophageal reflux disease (GERD). These features are present in the case reported data, but not well described in HPO and help account for the variation seen in the clinical phenotype in the first few principal dimensions.
 
 The heterogeneous variation in the data was clearly evident with the first four principal axes being required to explain more than 50% of the variation in the data set. Visual inspection shows the primary sources of variation in the clinical phenotype are explained by a few individuals with very different clinical features. Many of these exhibit highly specific facial or anatomical dysmorphisms. While coarse facial features are a core presentation, those with a milder course had clinical reports that articulated these dysmorphisms in much more detail. Additionally, talipes appears as an isolated feature without the typical microcephaly and hypomyelination, however there was significant heterogeneity in how feet contractures were reported in clinical case reports. This is particularly evident in rocker-bottom feet which was found closely related in our analysis to core features despite the prevalence in HPO being quite low (2/21), suggesting possible under-reporting or confounded reporting of this feature. Another core identified feature is bilateral cleft lip. This condition has a reported frequency of just 2/21 (@tbl-hpo) and may be an emerging feature for a more typical presentation given its close relationship with other classic features. Features isolated to just one or few cases in our consolidated data have been labelled as 'Isolated' in @tbl-hpo. An optimal choice of both 2 and 5 clusters were recommended in the analysis. A partition of the data with just two clusters would likely be useful in separating outliers from other data. In this analysis a larger number (5) was selected to align the goals of the analysis which was to uncover distinct groups of features.
 
-In terms of patient survival, the first few months of life show a sharp decline in survival probability confirming early demise in the infant period as a key factor. A small number of cases show survival into childhood and in some cases into the second decade of life. This work identifies a one year survival rate of 0.403 (95% CI: 0.252, 0.644). On the other hand, a naive estimate using just the number of deceased patients at this time as proportion of the study population is 0.43 (1 - 16/28). This highlights the importance of applying a survival analysis technique that incorporates censoring so as not to erroneously overestimate the survival probability. The current literature suggests the type of gene variant has an impact on survival time, which seems to be supported in this work. Through a comparison of multiple survival curves, stratified by variation type, the limited sample size prevented definitive conclusions with many cells having expected counts less than 5. 
+In terms of patient survival, the first few months of life show a sharp decline in survival probability confirming early demise in the infant period as a key factor. A small number of cases show survival into childhood and in some cases into the second decade of life. This work identifies a one year survival rate of 0.403 (95% CI: 0.252, 0.644). On the other hand, a naive estimate using just the number of deceased patients at this time as proportion of the study population is 0.43 (1 - 16/28). This highlights the importance of applying a survival analysis technique that incorporates censoring so as not to erroneously overestimate the survival probability. The current literature suggests the type of gene variant has an impact on survival time, which seems to be supported in this work. Through a comparison of multiple survival curves, stratified by variation type, the limited sample size prevented definitive conclusions with many cells having expected counts less than 5.
 
 Despite NEDMABA exhibiting a diverse and heterogeneous clinical phenotype, our analysis was able to identify meaningful substructures in this data through the use of dimension reduction techniques (MCA) and cluster analysis. This has isolated the classic NEDMABA phenotype of microcephaly, hypomyelination, arthrogryposis, simplified gyral pattern and developmental delay. Furthermore it has isolated additional distinct groupings of features that are exhibited in patients such as vocal cord paralysis, swallowing dysfunction, tube feeding and GERD. Furthermore, we were able to quantify the expected baseline survival probabilities for children with this condition as well as quantifying the significant variation in these estimates. Future work is required with the benefit of more cases, to better understand the differences in survival curves for other factors associated with genotype.
 
 \newpage
 
-# Appendix  
+# Appendix
 
 ```{r}
 #| label: tbl-hpo
@@ -535,6 +527,15 @@ cbind(cluster_data, cluster = cluster_assignments) |>
 ```
 
 ```{r}
+#| label: tbl-km
+#| tbl-cap: "Survival probabilities derived from Kaplan-Meier estimation for the range of recorded survival times, including 95% Confidence Interval."
+x |> 
+  gt() |> 
+  gt::fmt_percent(columns = c(surv, upper, lower)) |> 
+  gt::fmt_number(columns = c(std.err), decimals = 2)
+```
+
+```{r}
 #| label: tbl-dict
 #| tbl-cap: Data dictionary of the final data set used for the analysis. This combines the case reports and supplied data for available and references studies. The data has been transformed into a tidy format with formatting applied. 
 tar_load(subjects)
@@ -543,4 +544,4 @@ make_data_dictionary(subjects)
 
 \newpage
 
-# References {-}
+# References {.unnumbered}
