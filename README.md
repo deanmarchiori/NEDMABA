@@ -1,4 +1,4 @@
-# Meta-Analysis of Clinical Phenotype and Patient Survival in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies Due to Bi-allelic Loss of Function Variants in SMPD
+# Meta-Analysis of Clinical Phenotype and Patient Survival in Neurodevelopmental Disorder with Microcephaly, Arthrogryposis, and Structural Brain Anomalies Due to Bi-allelic Loss of Function Variants in SMPD4
 
 ## Abstract
 
